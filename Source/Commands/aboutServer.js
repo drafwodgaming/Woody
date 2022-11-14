@@ -14,7 +14,7 @@ module.exports = {
     const embedThumbnailImage = {
       url:
         interaction.guild.iconURL() ||
-        "https://cdn.discordapp.com/attachments/1009065422777225298/1041782288393982042/C2.png",
+        "https://cdn.discordapp.com/attachments/1035282799315402783/1041788396063969381/NO_AVA.png",
     };
     await interaction.reply({
       embeds: [
