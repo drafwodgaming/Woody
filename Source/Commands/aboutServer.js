@@ -8,7 +8,8 @@ module.exports = {
   async execute(interaction) {
     const embedDescription =
       `**Название :** ${interaction.guild.name}\n` +
-      `**Создатель :** <@${interaction.guild.ownerId}>`;
+      `**Создатель :** <@${interaction.guild.ownerId}>\n` +
+      `**Участники :** ${interaction.guild.memberCount}\n`;
     await interaction.reply({
       embeds: [embedSetup("О сервере", embedDescription, 0x2f3136)],
     });
