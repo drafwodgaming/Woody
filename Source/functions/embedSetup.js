@@ -6,5 +6,4 @@ function embedSetup(title, description, color, thumbnail) {
     thumbnail: thumbnail,
   };
 }
-
 module.exports = { embedSetup };
