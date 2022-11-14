@@ -6,6 +6,6 @@ module.exports = {
   once: true,
   async execute(client) {
     client.user.setActivity(botConfig.activity, { type: ActivityType.Playing });
-    console.log(`[ЛОГИ] Бот ${client.user.tag} готов!`);
+    console.log(`[ LOGS ] Бот ${client.user.tag} запущен!`);
   },
 };
