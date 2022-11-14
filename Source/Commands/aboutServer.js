@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { embedSetup } = require("../function/embedSetup");
+const emojiCharacters = require("../../Config/emojiCharacters");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -7,7 +8,13 @@ module.exports = {
     .setDescription("Информация о сервере."),
   async execute(interaction) {
     await interaction.reply({
-      embeds: [embedSetup("О сервере", "**Название:**", 0x2f3136)],
+      embeds: [
+        embedSetup(
+          "О сервере",
+          `**Название:** \` ${interaction.guild.name} \``,
+          0xe5be4d
+        ),
+      ],
     });
   },
 };
