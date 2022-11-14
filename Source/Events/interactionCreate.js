@@ -11,7 +11,7 @@ module.exports = {
       await command.execute(interaction).catch(async (error) => {
         console.log(`[ Ошибка ] ${error}`);
         await interaction.reply({
-          content: "Произошла ошибка при вызове этой команды!",
+          content: `Произошла ошибка при вызове этой команды!`,
           ephemeral: true,
         });
       });
