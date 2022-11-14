@@ -1,7 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { embedSetup } = require("../functions/embedSetup");
-const emojiChatacters = require("../../Config/emojiCharacters");
-const emojiCharacters = require("../../Config/emojiCharacters");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,8 +10,18 @@ module.exports = {
       `**Название :** ${interaction.guild.name}\n` +
       `**Создатель :** <@${interaction.guild.ownerId}>\n` +
       `**Участники :** ${interaction.guild.memberCount}\n`;
+    const embedThumbnailImage = {
+      url: interaction.guild.iconURL(),
+    };
     await interaction.reply({
-      embeds: [embedSetup("О сервере", embedDescription, 0x2f3136)],
+      embeds: [
+        embedSetup(
+          "О сервере",
+          embedDescription,
+          0x2f3136,
+          embedThumbnailImage
+        ),
+      ],
     });
   },
 };
