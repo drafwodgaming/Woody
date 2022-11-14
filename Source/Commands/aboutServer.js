@@ -13,9 +13,7 @@ module.exports = {
       `**Участники :** ${interaction.guild.memberCount}\n` +
       `**Каналы :** ${interaction.guild.channelCount}`;
     const embedThumbnailImage = {
-      url:
-        interaction.guild.iconURL() ||
-        "https://cdn.discordapp.com/attachments/1035282799315402783/1041788396063969381/NO_AVA.png",
+      url: interaction.guild.iconURL() || "https://i.imgur.com/ZvDmhN9.png",
     };
     await interaction.reply({
       embeds: [

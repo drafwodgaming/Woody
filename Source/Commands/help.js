@@ -13,5 +13,5 @@ module.exports = {
       embeds: [embedSetup("Команды", embedDescription, 0xf6d065)],
       ephemeral: true,
     });
-  };
+  },
 };
