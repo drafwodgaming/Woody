@@ -11,7 +11,7 @@ module.exports = {
       `**Название :** ${interaction.guild.name}\n` +
       `**Создатель :** <@${interaction.guild.ownerId}>\n` +
       `**Участники :** ${interaction.guild.memberCount}\n` +
-      `**Каналы :** ${interaction.guild.channelCount}`;
+      `**Каналы :** ${interaction.guild.channelCount}\n`;
     const embedThumbnailImage = {
       url: interaction.guild.iconURL() || "https://i.imgur.com/ZvDmhN9.png",
     };
