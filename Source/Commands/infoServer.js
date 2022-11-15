@@ -29,7 +29,7 @@ module.exports = {
           }\n`,
       },
       {
-        name: "📡┃Каналы",
+        name: "📢┃Каналы",
         value:
           `**Всего :** ${interaction.guild.channels.cache.size}\n` +
           `ㅤ*- Текстовые* : ${
@@ -42,6 +42,18 @@ module.exports = {
               (c) => c.type === "GUILD_VOICE"
             ).size
           }\n`,
+      },
+      {
+        name: "😁┃Эмодзи и стикеры",
+        value:
+          `**Всего :** ${interaction.guild.emojis.cache.size}\n` +
+          `ㅤ*- Анимированные* : ${
+            interaction.guild.emojis.cache.filter((e) => e.animated).size
+          }\n` +
+          `ㅤ*- Статичные* : ${
+            interaction.guild.emojis.cache.filter((e) => !e.animated).size
+          }\n` +
+          `**Стикеры :** ${interaction.guild.emojis.cache.size}\n`,
       },
     ];
     const embedThumbnailImage = {
