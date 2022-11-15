@@ -4,14 +4,21 @@ const { embedSetup } = require("../functions/embedSetup");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("about-server")
-    .setDescription("Информация о сервере."),
+    .setName("serverinfo")
+    .setDescription("Информация о сервере"),
   async execute(interaction) {
+    const embedFields = [
+      {
+        name: "Информация о сервере",
+        value:
+          `**> Название :** ${interaction.guild.name}\n` +
+          `**> ID :** ${interaction.guild.id}\n`,
+      },
+    ];
     const embedDescription =
-      `**Название :** ${interaction.guild.name}\n` +
+      `` +
       `**Создатель :** <@${interaction.guild.ownerId}>\n` +
-      `**Участники :** ${interaction.guild.memberCount}\n` +
-      `**Каналы :** ${interaction.guild.channelCount}\n`;
+      `**Участники :** ${interaction.guild.memberCount}\n`;
     const embedThumbnailImage = {
       url: interaction.guild.iconURL() || "https://i.imgur.com/ZvDmhN9.png",
     };
@@ -20,7 +27,8 @@ module.exports = {
         embedSetup(
           "О сервере",
           embedDescription,
-          0x2f3136,
+          embedFields,
+          0xffffff,
           embedThumbnailImage
         ),
       ],

@@ -1,7 +1,8 @@
-function embedSetup(title, description, color, thumbnail) {
+function embedSetup(title, description, fields, color, thumbnail) {
   return {
     title: title,
     description: description,
+    fields: fields,
     color: color,
     thumbnail: thumbnail,
   };
