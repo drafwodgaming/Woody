@@ -1,5 +1,4 @@
-const { SlashCommandBuilder, messageLink } = require("discord.js");
-const emojiCharacters = require("../../Config/emojiCharacters");
+const { SlashCommandBuilder, ChannelType } = require("discord.js");
 const { embedSetup } = require("../functions/embedSetup");
 
 module.exports = {
@@ -34,17 +33,22 @@ module.exports = {
           `**Всего :** ${interaction.guild.channels.cache.size}\n` +
           `ㅤ*- Текстовые* : ${
             interaction.guild.channels.cache.filter(
-              (c) => c.type === "GUILD_TEXT"
+              (c) => c.type === ChannelType.GuildText
             ).size
           }\n` +
           `ㅤ*- Голосовые* : ${
             interaction.guild.channels.cache.filter(
-              (c) => c.type === "GUILD_VOICE"
+              (c) => c.type === ChannelType.GuildVoice
+            ).size
+          }\n` +
+          `ㅤ*- Категории* : ${
+            interaction.guild.channels.cache.filter(
+              (c) => c.type === ChannelType.GuildCategory
             ).size
           }\n`,
       },
       {
-        name: "😁┃Эмодзи и стикеры",
+        name: "😁┃Эмодзи",
         value:
           `**Всего :** ${interaction.guild.emojis.cache.size}\n` +
           `ㅤ*- Анимированные* : ${
@@ -52,8 +56,7 @@ module.exports = {
           }\n` +
           `ㅤ*- Статичные* : ${
             interaction.guild.emojis.cache.filter((e) => !e.animated).size
-          }\n` +
-          `**Стикеры :** ${interaction.guild.emojis.cache.size}\n`,
+          }\n`,
       },
     ];
     const embedThumbnailImage = {
