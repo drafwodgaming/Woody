@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChannelType, messageLink } = require("discord.js");
+const { SlashCommandBuilder, ChannelType } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 
 module.exports = {
