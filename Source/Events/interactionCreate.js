@@ -9,7 +9,7 @@ module.exports = {
       if (!command) return;
 
       await command.execute(interaction).catch(async (error) => {
-        console.log(`[ Ошибка ] ${error}`);
+        console.log(`[ ОШИБКА ] ${error}`);
         await interaction.reply({
           content: `Произошла ошибка при вызове этой команды!`,
           ephemeral: true,
