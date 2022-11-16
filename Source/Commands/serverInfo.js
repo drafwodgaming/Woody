@@ -64,31 +64,31 @@ module.exports = {
       {
         name: "Информация о сервере",
         value:
-          `**- Название :** ${guildName}\n` +
-          `**- Создатель :** <@${guildOwner}>\n` +
-          `**- Создан :** <t:${guildCreatedTimestamp}:R>`,
+          `**Название :** ${guildName}\n` +
+          `**Создатель :** <@${guildOwner}>\n` +
+          `**Создан :** <t:${guildCreatedTimestamp}:R>`,
       },
       {
         name: "📯┃Пользователи",
         value:
           `**Всего :** ${guildMemberCount}\n` +
-          `ㅤ*- Люди* : ${guildMembers}\n` +
-          `ㅤ*- Боты* : ${guildBots}\n`,
+          `*- Люди* : ${guildMembers}\n` +
+          `*- Боты* : ${guildBots}\n`,
       },
       {
         name: "📢┃Каналы",
         value:
           `**Всего :** ${guildChannels}\n` +
-          `ㅤ*- Текстовые* : ${guildTextChannels}\n` +
-          `ㅤ*- Голосовые* : ${guildVoiceChannels}\n` +
-          `ㅤ*- Категории* : ${guildCategory}\n`,
+          `*- Текстовые* : ${guildTextChannels}\n` +
+          `*- Голосовые* : ${guildVoiceChannels}\n` +
+          `*- Категории* : ${guildCategory}\n`,
       },
       {
         name: "😁┃Эмодзи",
         value:
           `**Всего :** ${guildEmojiCount}\n` +
-          `ㅤ*- Анимированные* : ${guildEmojiAnimate}\n` +
-          `ㅤ*- Статичные* : ${guildEmojiStatic}\n`,
+          `*- Анимированные* : ${guildEmojiAnimate}\n` +
+          `*- Статичные* : ${guildEmojiStatic}\n`,
       },
     ];
     const embedThumbnailImage = {
