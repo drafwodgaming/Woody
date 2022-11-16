@@ -32,4 +32,4 @@ async function setUpBot() {
   });
 }
 
-setUpBot().catch((error) => console.log(`[Ошибка] ${error}`));
+setUpBot().catch((error) => console.log(`[ ОШИБКА ] ${error}`));

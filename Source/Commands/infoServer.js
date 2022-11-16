@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChannelType } = require("discord.js");
+const { SlashCommandBuilder, ChannelType, messageLink } = require("discord.js");
 const { embedSetup } = require("../functions/embedSetup");
 
 module.exports = {
@@ -62,6 +62,9 @@ module.exports = {
     const embedThumbnailImage = {
       url: interaction.guild.iconURL() || "https://i.imgur.com/ZvDmhN9.png",
     };
+    if (interaction.message.author.bot) {
+      embedSetup.color = 0x7289da;
+    }
     await interaction.reply({
       embeds: [
         embedSetup("О сервере", "", embedFields, 0xffffff, embedThumbnailImage),
