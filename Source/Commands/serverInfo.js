@@ -81,7 +81,7 @@ module.exports = {
         value:
           `**Название :** ${name}\n` +
           `**Создатель :** <@${owner}>\n` +
-          `**Создан :** <t:${createdTimestamp}:R>`,
+          `**Создан :** <t:${createdTimestamp}:D>`,
       },
       {
         name: `Пользователи [ ${memberCount} ]`,
