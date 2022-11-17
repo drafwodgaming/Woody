@@ -60,8 +60,12 @@ module.exports = {
      */
     const serverRoles = interaction.guild.roles.cache
       .map((role) => role.toString())
-      .slice(1, 21);
+      .slice(1, 21)
+      .join(" ");
 
+    const serverRolesLength = interaction.guild.roles.cache.map(
+      (role) => role.name
+    ).length;
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: EMBED
@@ -93,8 +97,8 @@ module.exports = {
           `*- Статичные* : ${emojisStatic}\n`,
       },
       {
-        name: `Роли [ ${serverRoles.length} ]`,
-        value: `${serverRoles.join(" ")}`,
+        name: `Роли [ ${serverRolesLength} ]`,
+        value: `${serverRoles}`,
       },
     ];
     const embedThumbnailImage = {
