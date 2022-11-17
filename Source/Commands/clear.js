@@ -4,7 +4,7 @@ const { embedSetup } = require("../Functions/embedSetup");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("clear")
-    .setDescription("Очистка сообщений [ Administrator ]")
+    .setDescription("Очистка сообщений [ АДМИНИСТРАТОР ]")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addNumberOption((option) =>
       option

@@ -58,18 +58,10 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: РОЛИ
      * ! --------------------------------
      */
-    const roles = interaction.guild.roles.cache
-      .sort((a, b) => b.position - a.position)
+    const serverRoles = interaction.guild.roles.cache
       .map((role) => role.toString())
-      .slice(0, -1);
+      .slice(1, 21);
 
-    let rolesdisplay;
-
-    if (roles.length < 20) {
-      rolesdisplay = roles.join(" ");
-    } else {
-      rolesdisplay = roles.slice(20).join(" ");
-    }
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: EMBED
@@ -101,8 +93,8 @@ module.exports = {
           `*- Статичные* : ${emojisStatic}\n`,
       },
       {
-        name: `Роли [ ${roles.length - 1} ]`,
-        value: `${rolesdisplay}`,
+        name: `Роли [ ${serverRoles.length} ]`,
+        value: `${serverRoles.join(" ")}`,
       },
     ];
     const embedThumbnailImage = {

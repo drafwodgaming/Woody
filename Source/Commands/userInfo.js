@@ -20,7 +20,7 @@ module.exports = {
       {
         name: "Информация о пользователе",
         value:
-          `**Никнейм :** ${targetUser}\n` +
+          `**Никнейм :** ${targetUser} \n` +
           `**ID :** ||${targetUser.id}||\n` +
           `**Зарегистрирован :** <t:${userCreatedTimestamp}:R>`,
         inline: true,
