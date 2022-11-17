@@ -25,8 +25,8 @@ module.exports = {
      * ! --------------------------------
      */
     const embedDescription = "**Вы не можете удалить больше 100 сообщений!**";
-    const embedDescription2 = `**Удаление ${numMessages} сообщений невозможна!**`;
-    const embedDescription3 = `**${numMessages} сообщений удалены!**`;
+    const embedDescription2 = `**Удаление ${numMessages} сообщений невозможно!**`;
+    const embedDescription3 = `**${numMessages} сообщений удалено!**`;
 
     if (numMessages > 100) {
       return await interaction.reply({
