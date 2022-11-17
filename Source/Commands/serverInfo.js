@@ -101,7 +101,7 @@ module.exports = {
           `*- Статичные* : ${emojisStatic}\n`,
       },
       {
-        name: `Роли [ ${roles.length} ]`,
+        name: `Роли [ ${roles.length - 1} ]`,
         value: `${rolesdisplay}`,
       },
     ];
