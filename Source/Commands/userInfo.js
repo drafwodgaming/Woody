@@ -22,7 +22,7 @@ module.exports = {
         value:
           `**Никнейм :** ${targetUser}\n` +
           `**ID :** ||${targetUser.id}||\n` +
-          `**Создан :** <t:${userCreatedTimestamp}:R>`,
+          `**Зарегистрирован :** <t:${userCreatedTimestamp}:R>`,
         inline: true,
       },
       {
