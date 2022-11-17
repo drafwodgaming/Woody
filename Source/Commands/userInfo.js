@@ -11,7 +11,11 @@ module.exports = {
   async execute(interaction) {
     const targetUser = interaction.options.getUser("user");
     const userCreatedTimestamp = parseInt(targetUser.createdTimestamp / 1000);
-
+    /**
+     * ! --------------------------------
+     * ! ПЕРЕМЕННЫЕ: EMBED
+     * ! --------------------------------
+     */
     const embedFields = [
       {
         name: "Информация о пользователе",
@@ -31,7 +35,6 @@ module.exports = {
     const embedThumbnailImage = {
       url: targetUser.avatarURL() || "https://i.imgur.com/ZvDmhN9.png",
     };
-
     await interaction.reply({
       embeds: [
         embedSetup("О сервере", "", embedFields, 0xffffff, embedThumbnailImage),
