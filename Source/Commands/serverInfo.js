@@ -11,9 +11,9 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: ИНФОРМАЦИЯ О СЕРВЕРЕ
      * ! --------------------------------
      */
-    const guildName = interaction.guild.name;
-    const guildOwner = interaction.guild.ownerId;
-    const guildCreatedTimestamp = parseInt(
+    const name = interaction.guild.name;
+    const owner = interaction.guild.ownerId;
+    const createdTimestamp = parseInt(
       interaction.guild.createdTimestamp / 1000
     );
     /**
@@ -21,26 +21,24 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: ПОЛЬЗОВАТЕЛИ
      * ! --------------------------------
      */
-    const guildMemberCount = interaction.guild.memberCount;
-    const guildMembers = interaction.guild.members.cache.filter(
+    const memberCount = interaction.guild.memberCount;
+    const members = interaction.guild.members.cache.filter(
       (m) => !m.user.bot
     ).size;
-    const guildBots = interaction.guild.members.cache.filter(
-      (m) => m.user.bot
-    ).size;
+    const bots = interaction.guild.members.cache.filter((m) => m.user.bot).size;
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: КАНАЛЫ
      * ! --------------------------------
      */
-    const guildChannels = interaction.guild.channels.cache.size;
-    const guildTextChannels = interaction.guild.channels.cache.filter(
+    const channels = interaction.guild.channels.cache.size;
+    const textChannels = interaction.guild.channels.cache.filter(
       (c) => c.type === ChannelType.GuildText
     ).size;
-    const guildVoiceChannels = interaction.guild.channels.cache.filter(
+    const voiceChannels = interaction.guild.channels.cache.filter(
       (c) => c.type === ChannelType.GuildVoice
     ).size;
-    const guildCategory = interaction.guild.channels.cache.filter(
+    const categories = interaction.guild.channels.cache.filter(
       (c) => c.type === ChannelType.GuildCategory
     ).size;
     /**
@@ -48,13 +46,30 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: ЭМОДЗИ
      * ! --------------------------------
      */
-    const guildEmojiCount = interaction.guild.emojis.cache.size;
-    const guildEmojiAnimate = interaction.guild.emojis.cache.filter(
+    const emojiCount = interaction.guild.emojis.cache.size;
+    const emojisAnimate = interaction.guild.emojis.cache.filter(
       (e) => e.animated
     ).size;
-    const guildEmojiStatic = interaction.guild.emojis.cache.filter(
+    const emojisStatic = interaction.guild.emojis.cache.filter(
       (e) => !e.animated
     ).size;
+    /**
+     * ! --------------------------------
+     * ! ПЕРЕМЕННЫЕ: РОЛИ
+     * ! --------------------------------
+     */
+    const roles = interaction.guild.roles.cache
+      .sort((a, b) => b.position - a.position)
+      .map((role) => role.toString())
+      .slice(0, -1);
+
+    let rolesdisplay;
+
+    if (roles.length < 20) {
+      rolesdisplay = roles.join(" ");
+    } else {
+      rolesdisplay = roles.slice(20).join(" ");
+    }
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: EMBED
@@ -64,31 +79,30 @@ module.exports = {
       {
         name: "Информация о сервере",
         value:
-          `**Название :** ${guildName}\n` +
-          `**Создатель :** <@${guildOwner}>\n` +
-          `**Создан :** <t:${guildCreatedTimestamp}:R>`,
+          `**Название :** ${name}\n` +
+          `**Создатель :** <@${owner}>\n` +
+          `**Создан :** <t:${createdTimestamp}:R>`,
       },
       {
-        name: "📯┃Пользователи",
-        value:
-          `**Всего :** ${guildMemberCount}\n` +
-          `*- Люди* : ${guildMembers}\n` +
-          `*- Боты* : ${guildBots}\n`,
+        name: `Пользователи [ ${memberCount} ]`,
+        value: `*- Люди* : ${members}\n` + `*- Боты* : ${bots}\n`,
       },
       {
-        name: "📢┃Каналы",
+        name: `Каналы [ ${channels} ]`,
         value:
-          `**Всего :** ${guildChannels}\n` +
-          `*- Текстовые* : ${guildTextChannels}\n` +
-          `*- Голосовые* : ${guildVoiceChannels}\n` +
-          `*- Категории* : ${guildCategory}\n`,
+          `*- Текстовые* : ${textChannels}\n` +
+          `*- Голосовые* : ${voiceChannels}\n` +
+          `*- Категории* : ${categories}\n`,
       },
       {
-        name: "😁┃Эмодзи",
+        name: `Эмодзи [ ${emojiCount} ]`,
         value:
-          `**Всего :** ${guildEmojiCount}\n` +
-          `*- Анимированные* : ${guildEmojiAnimate}\n` +
-          `*- Статичные* : ${guildEmojiStatic}\n`,
+          `*- Анимированные* : ${emojisAnimate}\n` +
+          `*- Статичные* : ${emojisStatic}\n`,
+      },
+      {
+        name: `Роли [ ${roles.length} ]`,
+        value: `${rolesdisplay}`,
       },
     ];
     const embedThumbnailImage = {
