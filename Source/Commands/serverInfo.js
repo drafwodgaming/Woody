@@ -4,7 +4,8 @@ const { embedSetup } = require("../Functions/embedSetup");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("serverinfo")
-    .setDescription("Информация о сервере"),
+    .setDescription("Информация о сервере")
+    .setDMPermission(false),
   async execute(interaction) {
     /**
      * ! --------------------------------

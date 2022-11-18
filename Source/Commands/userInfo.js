@@ -10,6 +10,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("userinfo")
     .setDescription("Информация о сервере")
+    .setDMPermission(false)
     .addUserOption((option) =>
       option.setName("user").setDescription("Пользователи").setRequired(true)
     ),
@@ -21,6 +22,7 @@ module.exports = {
      */
     const targetUser = interaction.options.getUser("user");
     const guildMember = interaction.guild.members.cache.get(targetUser.id);
+
     const userCreatedAt = moment(targetUser.createdAt).format(
       "dddd, DD.MM.YYYY HH:mm"
     );
