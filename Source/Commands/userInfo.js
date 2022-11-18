@@ -20,14 +20,15 @@ module.exports = {
      * ! --------------------------------
      */
     const targetUser = interaction.options.getUser("user");
-    const userCreatedTimestamp = parseInt(targetUser.createdTimestamp / 1000);
-
+    const guildMember = interaction.guild.members.cache.get(targetUser.id);
+    const userCreatedAt = moment(targetUser.createdAt).format(
+      "dddd, DD.MM.YYYY HH:mm"
+    );
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: ПОЛЬЗОВАТЕЛЯ НА СЕРВЕРЕ
      * ! --------------------------------
      */
-    const guildMember = interaction.guild.members.cache.get(targetUser.id);
     const memberJoinedAt = moment(guildMember.joinedAt).format(
       "dddd, DD.MM.YYYY HH:mm"
     );
@@ -46,17 +47,17 @@ module.exports = {
       {
         name: "Информация о пользователе",
         value:
-          `**Никнейм :** ${targetUser} (${targetUser.tag}) \n` +
-          `**ID :** ||${targetUser.id}||\n` +
-          `**Зарегистрирован :** <t:${userCreatedTimestamp}:R>\n`,
-        inline: true,
+          `*- Никнейм* : ${targetUser}\n` +
+          `*- ID* : ${targetUser.id}\n` +
+          `*- Зарегистрирован* : \`${userCreatedAt}\`\n`,
       },
       {
-        name: "ㅤ",
-        value:
-          `**Присоединился к серверу :** \`${memberJoinedAt}\` \n` +
-          `**Роли пользователя :**\n ${memberRoles}`,
-        inline: true,
+        name: "Информация об участнике",
+        value: `*- Присоединился к серверу* : \`${memberJoinedAt}\` \n`,
+      },
+      {
+        name: `Роли`,
+        value: `${memberRoles || "нет ролей"}`,
       },
     ];
 
@@ -65,7 +66,13 @@ module.exports = {
     };
     await interaction.reply({
       embeds: [
-        embedSetup("О сервере", "", embedFields, 0xffffff, embedThumbnailImage),
+        embedSetup(
+          "О пользователе",
+          "",
+          embedFields,
+          0x2f3136,
+          embedThumbnailImage
+        ),
       ],
     });
   },

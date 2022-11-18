@@ -5,8 +5,8 @@ const fileSystem = require("fs");
 const path = require("path");
 
 const client = new Client({ intents: botIntents });
-const rest = new REST({ version: botConfig.restversion }).setToken(
-  botConfig.token
+const rest = new REST({ version: botConfig.restVersion }).setToken(
+  botConfig.tokedDev
 );
 
 client.commands = new Collection();
@@ -27,7 +27,7 @@ async function setUpBot() {
   client.commandsHandler();
   client.login(botConfig.token);
 
-  await rest.put(Routes.applicationCommands(botConfig.clientId), {
+  await rest.put(Routes.applicationCommands(botConfig.clientIdDev), {
     body: client.commandsArray,
   });
 }
