@@ -24,6 +24,13 @@ module.exports = {
     const userCreatedAt = moment(targetUser.createdAt).format(
       "dddd, DD.MM.YYYY HH:mm"
     );
+    let status = guildMember.presence.status;
+
+    if (status == "dnd") status = "⛔ Не беспокоить";
+    if (status == "online") status = "🟢 В сети";
+    if (status == "offline") status = "Не в сети";
+    if (status == "idle") status = "🌙 Отошёл";
+
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: ПОЛЬЗОВАТЕЛЯ НА СЕРВЕРЕ
@@ -49,7 +56,8 @@ module.exports = {
         value:
           `*- Никнейм* : ${targetUser}\n` +
           `*- ID* : ${targetUser.id}\n` +
-          `*- Зарегистрирован* : \`${userCreatedAt}\`\n`,
+          `*- Зарегистрирован* : \`${userCreatedAt}\`\n` +
+          `*- Статус* : ${status}`,
       },
       {
         name: "Информация об участнике",
