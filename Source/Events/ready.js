@@ -29,12 +29,14 @@ module.exports = {
         },
       ],
     });
-
-    console.log(
-      chalk.green(`[LOGS]`),
-      chalk.blackBright(`Bot`),
-      chalk.cyan(` ${client.user.tag}`),
-      chalk.blackBright(`is ready!`)
-    );
+    const clientData = [
+      {
+        Name: client.user.tag,
+        Servers: client.guilds.cache.size,
+        Channels: client.channels.cache.size,
+        Status: Presence.status,
+      },
+    ];
+    console.table(clientData);
   },
 };
