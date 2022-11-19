@@ -1,13 +1,25 @@
-const { Events, ActivityType } = require("discord.js");
-const botConfig = require("../../Config/botConfig");
+const { Events } = require("discord.js");
 const { Presence } = require("../../Config/botConfig");
+const botConfig = require("../../Config/botConfig");
+const mongoose = require("mongoose");
+const chalk = require("chalk");
 
 module.exports = {
   name: Events.ClientReady,
   once: true,
   async execute(client) {
-    let servers = await client.guilds.cache.size;
-
+    await mongoose
+      .connect(botConfig.monoDB, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(() =>
+        console.log(
+          chalk.green("[DATABASE STATUS]:"),
+          chalk.blackBright("Connected.")
+        )
+      )
+      .catch((error) => console.log(chalk.redBright(`[ ERROR ] ${error}`)));
     client.user.setPresence({
       status: Presence.status,
       activities: [
@@ -18,6 +30,11 @@ module.exports = {
       ],
     });
 
-    console.log(`[ ЛОГИРОВАНИЕ ] Бот ${client.user.tag} запущен!`);
+    console.log(
+      chalk.green(`[LOGS]`),
+      chalk.blackBright(`Bot`),
+      chalk.cyan(` ${client.user.tag}`),
+      chalk.blackBright(`is ready!`)
+    );
   },
 };

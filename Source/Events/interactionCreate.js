@@ -1,4 +1,5 @@
 const { Events } = require("discord.js");
+const chalk = require("chalk");
 
 module.exports = {
   name: Events.InteractionCreate,
@@ -9,7 +10,7 @@ module.exports = {
       if (!command) return;
 
       await command.execute(interaction).catch(async (error) => {
-        console.log(`[ ОШИБКА ] ${error}`);
+        console.log(chalk.redBright(`[ERROR] ${error}`));
         await interaction.reply({
           content: `Произошла ошибка при вызове этой команды!`,
           ephemeral: true,
