@@ -2,6 +2,8 @@ const { SlashCommandBuilder } = require("discord.js");
 const moment = require("moment");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
+const { stripIndents } = require("common-tags");
+
 moment.updateLocale(botConfig.momentLocale, {
   weekdays: botConfig.momentWeekList.split("_"),
 });
@@ -56,19 +58,22 @@ module.exports = {
     const embedFields = [
       {
         name: "Информация о пользователе",
-        value:
-          `*- Никнейм* : ${targetUser}\n` +
-          `*- ID* : ${targetUser.id}\n` +
-          `*- Зарегистрирован* : \`${userCreatedAt}\`\n` +
-          `*- Статус* : ${
-            statusList[
-              guildMember.presence ? guildMember.presence.status : "offline"
-            ]
-          }`,
+        value: stripIndents`
+        *- Никнейм* : ${targetUser}
+        *- ID* : ${targetUser.id}
+        *- Зарегистрирован* : \`${userCreatedAt}\`
+        *- Статус* : ${
+          statusList[
+            guildMember.presence ? guildMember.presence.status : "offline"
+          ]
+        }
+        `,
       },
       {
         name: "Информация об участнике",
-        value: `*- Присоединился к серверу* : \`${memberJoinedAt}\` \n`,
+        value: stripIndents`
+        *- Присоединился к серверу* : \`${memberJoinedAt}\`
+        `,
       },
       {
         name: `Роли`,

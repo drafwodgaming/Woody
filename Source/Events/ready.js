@@ -1,4 +1,4 @@
-const { Events } = require("discord.js");
+const { Events, ActivityType } = require("discord.js");
 const { Presence } = require("../../Config/botConfig");
 const botConfig = require("../../Config/botConfig");
 const mongoose = require("mongoose");
@@ -14,12 +14,10 @@ module.exports = {
         useUnifiedTopology: true,
       })
       .then(() =>
-        console.log(
-          chalk.green("[DATABASE STATUS]:"),
-          chalk.blackBright("Connected.")
-        )
+        console.log(chalk.blue("[DATABASE STATUS]:"), chalk.black("Connected."))
       )
-      .catch((error) => console.log(chalk.redBright(`[ ERROR ] ${error}`)));
+      .catch((error) => console.log(`[ ERROR ] ${error}`));
+
     client.user.setPresence({
       status: Presence.status,
       activities: [
@@ -34,7 +32,7 @@ module.exports = {
         Name: client.user.tag,
         Servers: client.guilds.cache.size,
         Channels: client.channels.cache.size,
-        Status: Presence.status,
+        Status: "✔",
       },
     ];
     console.table(clientData);

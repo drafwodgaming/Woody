@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, ChannelType } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
+const { stripIndents } = require("common-tags");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -75,10 +76,11 @@ module.exports = {
     const embedFields = [
       {
         name: "Информация о сервере",
-        value:
-          `**Название :** ${name}\n` +
-          `**Создатель :** <@${owner}>\n` +
-          `**Создан :** <t:${createdTimestamp}:D>`,
+        value: stripIndents`
+        **Название :** ${name}
+        **Создатель :** <@${owner}>
+        **Создан :** <t:${createdTimestamp}:D>
+        `,
       },
       {
         name: `Пользователи [ ${memberCount} ]`,
@@ -86,16 +88,18 @@ module.exports = {
       },
       {
         name: `Каналы [ ${channels} ]`,
-        value:
-          `*- Текстовые* : ${textChannels}\n` +
-          `*- Голосовые* : ${voiceChannels}\n` +
-          `*- Категории* : ${categories}\n`,
+        value: stripIndents`
+        *- Текстовые* : ${textChannels}
+        *- Голосовые* : ${voiceChannels}
+        *- Категории* : ${categories}
+        `,
       },
       {
         name: `Эмодзи [ ${emojiCount} ]`,
-        value:
-          `*- Анимированные* : ${emojisAnimate}\n` +
-          `*- Статичные* : ${emojisStatic}\n`,
+        value: stripIndents`
+        *- Анимированные* : ${emojisAnimate}
+        *- Статичные* : ${emojisStatic}
+        `,
       },
       {
         name: `Роли [ ${serverRolesLength} ]`,
