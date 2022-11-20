@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+  bold,
+} = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const ru = require("../../Config/ru");
 
@@ -28,9 +32,9 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: EMBED
      * ! --------------------------------
      */
-    const embedDescription = "**Вы не можете удалить больше 100 сообщений!**";
-    const embedDescription2 = `**Удаление ${numMessages} сообщений невозможно!**`;
-    const embedDescription3 = `**${numMessages} сообщений удалено!**`;
+    const embedDescription = bold(ru.embeds.clear.description.value1);
+    const embedDescription2 = bold(ru.embeds.clear.description.value2);
+    const embedDescription3 = bold(ru.embeds.clear.description.value3);
 
     if (numMessages > 100) {
       return await interaction.reply({
