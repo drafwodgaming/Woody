@@ -3,6 +3,7 @@ const { Presence } = require("../../Config/botConfig");
 const botConfig = require("../../Config/botConfig");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
+const ru = require("../../Config/ru");
 
 module.exports = {
   name: Events.ClientReady,
@@ -16,7 +17,9 @@ module.exports = {
       .then(() =>
         console.log(chalk.blue("[DATABASE STATUS]:"), chalk.black("Connected."))
       )
-      .catch((error) => console.log(`[ ERROR ] ${error}`));
+      .catch((error) =>
+        console.log(chalk.redBright(ru.errors.errorTitle)`${error}`)
+      );
 
     client.user.setPresence({
       status: Presence.status,
@@ -32,7 +35,6 @@ module.exports = {
         Name: client.user.tag,
         Servers: client.guilds.cache.size,
         Channels: client.channels.cache.size,
-        Status: "✔",
       },
     ];
     console.table(clientData);

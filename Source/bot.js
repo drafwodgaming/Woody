@@ -3,6 +3,7 @@ const botConfig = require("../Config/botConfig");
 const botIntents = require("../Config/botIntents");
 const fileSystem = require("fs");
 const path = require("path");
+const ru = require("../Config/ru");
 
 const client = new Client({ intents: botIntents });
 const rest = new REST({ version: botConfig.restVersion }).setToken(
@@ -32,4 +33,4 @@ async function setUpBot() {
   });
 }
 
-setUpBot().catch((error) => console.log(`[ ОШИБКА ] ${error}`));
+setUpBot().catch((error) => console.log(`${ru.errors.errorTitle} ${error}`));
