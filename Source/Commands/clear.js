@@ -10,8 +10,8 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addNumberOption((option) =>
       option
-        .setName("messages")
-        .setDescription("Количество сообщений")
+        .setName(ru.bot.commands.clear.option.name)
+        .setDescription(ru.bot.commands.clear.option.description)
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -20,7 +20,9 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ
      * ! --------------------------------
      */
-    const numMessages = interaction.options.get("messages").value;
+    const numMessages = interaction.options.get(
+      ru.bot.commands.clear.option.name
+    ).value;
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: EMBED

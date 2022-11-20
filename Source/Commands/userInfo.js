@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, italic } = require("discord.js");
 const moment = require("moment");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
@@ -61,14 +61,15 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: EMBED
      * ! --------------------------------
      */
+    const embedTitle = ru.embeds.userInfo.title.name;
     const embedFields = [
       {
-        name: "Информация о пользователе",
+        name: ru.embeds.userInfo.fields.field1.name,
         value: stripIndents`
-        *- Никнейм* : ${targetUser}
-        *- ID* : ${targetUser.id}
-        *- Зарегистрирован* : \`${userCreatedAt}\`
-        *- Статус* : ${
+        ${italic(ru.embeds.userInfo.fields.field1.value1)} ${targetUser}
+        ${italic(ru.embeds.userInfo.fields.field1.value2)} ${targetUser.id}
+        ${italic(ru.embeds.userInfo.fields.field1.value3)} \`${userCreatedAt}\`
+        ${italic(ru.embeds.userInfo.fields.field1.value4)} ${
           statusList[
             guildMember.presence ? guildMember.presence.status : "offline"
           ]
@@ -76,14 +77,14 @@ module.exports = {
         `,
       },
       {
-        name: "Информация об участнике",
+        name: ru.embeds.userInfo.fields.field2.name,
         value: stripIndents`
-        *- Присоединился к серверу* : \`${memberJoinedAt}\`
+        ${italic(ru.embeds.userInfo.fields.field2.value1)} \`${memberJoinedAt}\`
         `,
       },
       {
-        name: `Роли`,
-        value: `${memberRoles || "нет ролей"}`,
+        name: ru.embeds.userInfo.fields.field3.name,
+        value: `${memberRoles || ru.embeds.userInfo.fields.field3.value1}`,
       },
     ];
 
@@ -92,13 +93,7 @@ module.exports = {
     };
     await interaction.reply({
       embeds: [
-        embedSetup(
-          "О пользователе",
-          "",
-          embedFields,
-          0x2f3136,
-          embedThumbnailImage
-        ),
+        embedSetup(embedTitle, "", embedFields, 0x2f3136, embedThumbnailImage),
       ],
     });
   },

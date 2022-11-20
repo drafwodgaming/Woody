@@ -82,48 +82,54 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: EMBED
      * ! --------------------------------
      */
+    const embedTittle = ru.embeds.serverInfo.title.name;
     const embedFields = [
       {
-        name: "Информация о сервере",
+        name: ru.embeds.serverInfo.fields.field1.name,
         value: stripIndents`
-        ${bold("Название :")} ${name}
-        ${bold("Создатель :")} ${userMention(ownerId)}
-        ${bold("Создан :")} ${time(createdTimestamp, TimestampStyles.LongDate)}
+        ${bold(ru.embeds.serverInfo.fields.field1.value1)} ${name}
+        ${bold(ru.embeds.serverInfo.fields.field1.value2)} ${userMention(
+          ownerId
+        )}
+        ${bold(ru.embeds.serverInfo.fields.field1.value3)} ${time(
+          createdTimestamp,
+          TimestampStyles.LongDate
+        )}
         `,
       },
       {
-        name: `Пользователи [ ${memberCount} ]`,
+        name: `${ru.embeds.serverInfo.fields.field2.name} [ ${memberCount} ]`,
         value: stripIndents`
-        ${italic("- Люди")} : ${members}
-        ${italic("- Боты")} : ${bots}
+        ${italic(ru.embeds.serverInfo.fields.field2.value1)} : ${members}
+        ${italic(ru.embeds.serverInfo.fields.field2.value2)} : ${bots}
         `,
       },
       {
-        name: `Каналы [ ${channels} ]`,
+        name: `${ru.embeds.serverInfo.fields.field3.name} [ ${channels} ]`,
         value: stripIndents`
-        ${italic("- Текстовые")} : ${textChannels}
-        ${italic("- Голосовые")} : ${voiceChannels}
-        ${italic("- Категории")} : ${categories}
+        ${italic(ru.embeds.serverInfo.fields.field3.value1)} : ${textChannels}
+        ${italic(ru.embeds.serverInfo.fields.field3.value2)} : ${voiceChannels}
+        ${italic(ru.embeds.serverInfo.fields.field3.value3)} : ${categories}
         `,
       },
       {
-        name: `Эмодзи [ ${emojiCount} ]`,
+        name: `${ru.embeds.serverInfo.fields.field4.name} [ ${emojiCount} ]`,
         value: stripIndents`
-        ${italic("- Анимированные")} : ${emojisAnimate}
-        ${italic("- Статичные")} : ${emojisStatic}
+        ${italic(ru.embeds.serverInfo.fields.field4.value1)} : ${emojisAnimate}
+        ${italic(ru.embeds.serverInfo.fields.field4.value2)} : ${emojisStatic}
         `,
       },
       {
-        name: `Роли [ ${serverRolesLength} ]`,
+        name: `${ru.embeds.serverInfo.fields.field5.name} [ ${serverRolesLength} ]`,
         value: `${serverRoles}`,
       },
     ];
     const embedThumbnailImage = {
-      url: interaction.guild.iconURL() || "https://i.imgur.com/ZvDmhN9.png",
+      url: interaction.guild.iconURL() || ru.embeds.serverInfo.thumbnail.url,
     };
     await interaction.reply({
       embeds: [
-        embedSetup("О сервере", "", embedFields, 0xffffff, embedThumbnailImage),
+        embedSetup(embedTittle, "", embedFields, 0xffffff, embedThumbnailImage),
       ],
     });
   },
