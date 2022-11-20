@@ -84,7 +84,7 @@ module.exports = {
       },
       {
         name: ru.embeds.userInfo.fields.field3.name,
-        value: `${memberRoles || ru.embeds.userInfo.fields.field3.value1}`,
+        value: memberRoles || ru.embeds.userInfo.fields.field3.value1,
       },
     ];
 
