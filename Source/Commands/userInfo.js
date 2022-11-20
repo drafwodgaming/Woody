@@ -3,6 +3,7 @@ const moment = require("moment");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
 const { stripIndents } = require("common-tags");
+const ru = require("../../Config/ru");
 
 moment.updateLocale(botConfig.momentLocale, {
   weekdays: botConfig.momentWeekList.split("_"),
@@ -10,11 +11,14 @@ moment.updateLocale(botConfig.momentLocale, {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("userinfo")
-    .setDescription("Информация о сервере")
+    .setName(ru.bot.commands.userInfo.name)
+    .setDescription(ru.bot.commands.userInfo.description)
     .setDMPermission(false)
     .addUserOption((option) =>
-      option.setName("user").setDescription("Пользователи").setRequired(true)
+      option
+        .setName(ru.bot.commands.userInfo.option.name)
+        .setDescription(ru.bot.commands.userInfo.option.description)
+        .setRequired(true)
     ),
   async execute(interaction) {
     /**
@@ -22,7 +26,9 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: ПОЛЬЗОВАТЕЛЯ
      * ! --------------------------------
      */
-    const targetUser = interaction.options.getUser("user");
+    const targetUser = interaction.options.getUser(
+      ru.bot.commands.userInfo.option.name
+    );
     const guildMember = interaction.guild.members.cache.get(targetUser.id);
 
     const userCreatedAt = moment(targetUser.createdAt).format(

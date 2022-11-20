@@ -1,10 +1,11 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
+const ru = require("../../Config/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("clear")
-    .setDescription("Очистка сообщений [ АДМИНИСТРАТОР ]")
+    .setName(ru.bot.commands.clear.name)
+    .setDescription(ru.bot.commands.clear.description)
     .setDMPermission(false)
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addNumberOption((option) =>

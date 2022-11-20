@@ -1,11 +1,20 @@
-const { SlashCommandBuilder, ChannelType } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  ChannelType,
+  userMention,
+  TimestampStyles,
+  time,
+  bold,
+  italic,
+} = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const { stripIndents } = require("common-tags");
+const ru = require("../../Config/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("serverinfo")
-    .setDescription("Информация о сервере")
+    .setName(ru.bot.commands.serverInfo.name)
+    .setDescription(ru.bot.commands.serverInfo.description)
     .setDMPermission(false),
   async execute(interaction) {
     /**
@@ -14,7 +23,7 @@ module.exports = {
      * ! --------------------------------
      */
     const name = interaction.guild.name;
-    const owner = interaction.guild.ownerId;
+    const ownerId = interaction.guild.ownerId;
     const createdTimestamp = parseInt(
       interaction.guild.createdTimestamp / 1000
     );
@@ -77,28 +86,31 @@ module.exports = {
       {
         name: "Информация о сервере",
         value: stripIndents`
-        **Название :** ${name}
-        **Создатель :** <@${owner}>
-        **Создан :** <t:${createdTimestamp}:D>
+        ${bold("Название :")} ${name}
+        ${bold("Создатель :")} ${userMention(ownerId)}
+        ${bold("Создан :")} ${time(createdTimestamp, TimestampStyles.LongDate)}
         `,
       },
       {
         name: `Пользователи [ ${memberCount} ]`,
-        value: `*- Люди* : ${members}\n` + `*- Боты* : ${bots}\n`,
+        value: stripIndents`
+        ${italic("- Люди")} : ${members}
+        ${italic("- Боты")} : ${bots}
+        `,
       },
       {
         name: `Каналы [ ${channels} ]`,
         value: stripIndents`
-        *- Текстовые* : ${textChannels}
-        *- Голосовые* : ${voiceChannels}
-        *- Категории* : ${categories}
+        ${italic("- Текстовые")} : ${textChannels}
+        ${italic("- Голосовые")} : ${voiceChannels}
+        ${italic("- Категории")} : ${categories}
         `,
       },
       {
         name: `Эмодзи [ ${emojiCount} ]`,
         value: stripIndents`
-        *- Анимированные* : ${emojisAnimate}
-        *- Статичные* : ${emojisStatic}
+        ${italic("- Анимированные")} : ${emojisAnimate}
+        ${italic("- Статичные")} : ${emojisStatic}
         `,
       },
       {
