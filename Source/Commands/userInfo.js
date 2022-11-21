@@ -64,12 +64,12 @@ module.exports = {
     const embedTitle = ru.embeds.userInfo.title.name;
     const embedFields = [
       {
-        name: ru.embeds.userInfo.fields.field1.name,
+        name: ru.embeds.userInfo.fields.aboutUser.name,
         value: stripIndents`
-        ${italic(ru.embeds.userInfo.fields.field1.value1)} ${targetUser}
-        ${italic(ru.embeds.userInfo.fields.field1.value2)} ${targetUser.id}
-        ${italic(ru.embeds.userInfo.fields.field1.value3)} \`${userCreatedAt}\`
-        ${italic(ru.embeds.userInfo.fields.field1.value4)} ${
+        ${ru.embeds.userInfo.fields.aboutUser.nickname} ${targetUser}
+        ${ru.embeds.userInfo.fields.aboutUser.userId} ${targetUser.id}
+        ${ru.embeds.userInfo.fields.aboutUser.createdTime} \`${userCreatedAt}\`
+        ${ru.embeds.userInfo.fields.aboutUser.userStatus} ${
           statusList[
             guildMember.presence ? guildMember.presence.status : "offline"
           ]
@@ -77,19 +77,19 @@ module.exports = {
         `,
       },
       {
-        name: ru.embeds.userInfo.fields.field2.name,
+        name: ru.embeds.userInfo.fields.aboutMember.name,
         value: stripIndents`
-        ${italic(ru.embeds.userInfo.fields.field2.value1)} \`${memberJoinedAt}\`
+        ${ru.embeds.userInfo.fields.aboutMember.joinedTime} \`${memberJoinedAt}\`
         `,
       },
       {
-        name: ru.embeds.userInfo.fields.field3.name,
-        value: memberRoles || ru.embeds.userInfo.fields.field3.value1,
+        name: ru.embeds.userInfo.fields.memberRoles.name,
+        value: memberRoles || ru.embeds.userInfo.fields.memberRoles.noRoles,
       },
     ];
 
     const embedThumbnailImage = {
-      url: targetUser.avatarURL() || "https://i.imgur.com/ZvDmhN9.png",
+      url: targetUser.avatarURL() || ru.embeds.serverInfo.thumbnail.url,
     };
     await interaction.reply({
       embeds: [

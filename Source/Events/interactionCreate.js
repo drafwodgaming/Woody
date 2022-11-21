@@ -11,7 +11,7 @@ module.exports = {
       if (!command) return;
 
       await command.execute(interaction).catch(async (error) => {
-        console.log(chalk.redBright(`[ERROR] ${error}`));
+        console.log(chalk.redBright(`${ru.logs.errors.title} ${error}`));
         await interaction.reply({
           content: ru.logs.errors.body.errorCallCommand,
           ephemeral: true,

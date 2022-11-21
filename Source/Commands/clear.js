@@ -18,7 +18,7 @@ module.exports = {
   async execute(interaction) {
     /**
      * ! --------------------------------
-     * ! ПЕРЕМЕННЫЕ
+     * ! ПЕРЕМЕННАЯ: КОЛИЧЕСТВО СООБЩЕНИЙ
      * ! --------------------------------
      */
     const numMessages = interaction.options.get(
@@ -38,6 +38,11 @@ module.exports = {
         numMessages: numMessages,
       }
     );
+    /**
+     * ? --------------------------------
+     * ? ПРОВЕРКА НА КОЛИЧЕСТВО ВВЕДЁЕННЫХ СООБЩЕНИЙ
+     * ? --------------------------------
+     */
     if (numMessages > 100) {
       return await interaction.reply({
         embeds: [embedSetup("", messageDeletionLimit, "", 0x2f3136, "")],

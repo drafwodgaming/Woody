@@ -74,7 +74,6 @@ module.exports = {
       .map((role) => role.toString())
       .slice(1, 21)
       .join(" ");
-
     const serverRolesLength = interaction.guild.roles.cache.map(
       (role) => role.name
     ).length;
