@@ -4,8 +4,6 @@ const {
   userMention,
   TimestampStyles,
   time,
-  bold,
-  italic,
 } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const { stripIndents } = require("common-tags");
