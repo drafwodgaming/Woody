@@ -1,5 +1,4 @@
 const { Events, ActivityType } = require("discord.js");
-const { Presence } = require("../../Config/botConfig");
 const botConfig = require("../../Config/botConfig");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
@@ -25,11 +24,11 @@ module.exports = {
       );
 
     client.user.setPresence({
-      status: Presence.status,
+      status: botConfig.bot.presence.status,
       activities: [
         {
-          name: Presence.activity,
-          type: Presence.type,
+          name: botConfig.bot.presence.activity,
+          type: botConfig.bot.presence.type,
         },
       ],
     });

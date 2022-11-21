@@ -6,8 +6,8 @@ const path = require("path");
 const ru = require("../Config/ru");
 
 const client = new Client({ intents: botIntents });
-const rest = new REST({ version: botConfig.restVersion }).setToken(
-  botConfig.tokenDev
+const rest = new REST({ version: botConfig.bot.restVersion }).setToken(
+  botConfig.bot.tokenDev
 );
 
 client.commands = new Collection();
@@ -26,9 +26,9 @@ for (const file of handlersFiles) {
 async function setUpBot() {
   client.eventsHandler();
   client.commandsHandler();
-  client.login(botConfig.tokenDev);
+  client.login(botConfig.bot.tokenDev);
 
-  await rest.put(Routes.applicationCommands(botConfig.clientIdDev), {
+  await rest.put(Routes.applicationCommands(botConfig.bot.clientIdDev), {
     body: client.commandsArray,
   });
 }

@@ -9,6 +9,7 @@ const { embedSetup } = require("../Functions/embedSetup");
 const { stripIndents } = require("common-tags");
 const ru = require("../../Config/ru");
 const mustache = require("mustache");
+const botConfig = require("../../Config/botConfig");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -128,12 +129,19 @@ module.exports = {
         value: serverRoles,
       },
     ];
+    const embedColors = botConfig.embedColors.trancparent;
     const embedThumbnailImage = {
       url: interaction.guild.iconURL() || ru.embeds.serverInfo.thumbnail.url,
     };
     await interaction.reply({
       embeds: [
-        embedSetup(embedTittle, "", embedFields, 0xffffff, embedThumbnailImage),
+        embedSetup(
+          embedTittle,
+          "",
+          embedFields,
+          embedColors,
+          embedThumbnailImage
+        ),
       ],
     });
   },

@@ -2,6 +2,7 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const ru = require("../../Config/ru");
 const mustache = require("mustache");
+const botConfig = require("../../Config/botConfig");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -38,6 +39,9 @@ module.exports = {
         numMessages: numMessages,
       }
     );
+    const errorColor = botConfig.embedColors.error;
+    const successColor = botConfig.embedColors.success;
+
     /**
      * ! --------------------------------
      * ! ПРОВЕРКА НА КОЛИЧЕСТВО ВВЕДЁЕННЫХ СООБЩЕНИЙ
@@ -45,18 +49,18 @@ module.exports = {
      */
     if (numMessages > 100) {
       return await interaction.reply({
-        embeds: [embedSetup("", messageDeletionLimit, "", 0x2f3136, "")],
+        embeds: [embedSetup("", messageDeletionLimit, "", errorColor, "")],
         ephemeral: true,
       });
     } else if (numMessages <= 0) {
       return await interaction.reply({
-        embeds: [embedSetup("", cannotDeleteMsgs, "", 0x2f3136, "")],
+        embeds: [embedSetup("", cannotDeleteMsgs, "", errorColor, "")],
         ephemeral: true,
       });
     }
     await interaction.channel.bulkDelete(numMessages, true);
     await interaction.reply({
-      embeds: [embedSetup("", messageDeleted, "", 0x2f3136, "")],
+      embeds: [embedSetup("", messageDeleted, "", successColor, "")],
       ephemeral: true,
     });
   },

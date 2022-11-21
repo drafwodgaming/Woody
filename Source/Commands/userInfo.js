@@ -5,8 +5,8 @@ const botConfig = require("../../Config/botConfig");
 const { stripIndents } = require("common-tags");
 const ru = require("../../Config/ru");
 
-moment.updateLocale(botConfig.momentLocale, {
-  weekdays: botConfig.momentWeekList.split("_"),
+moment.updateLocale(ru.time.moment.momentLocale, {
+  weekdays: ru.time.moment.momentWeekList.split("_"),
 });
 
 module.exports = {
@@ -87,13 +87,20 @@ module.exports = {
         value: memberRoles || ru.embeds.userInfo.fields.memberRoles.noRoles,
       },
     ];
+    const embedColor = botConfig.embedColors.trancparent;
 
     const embedThumbnailImage = {
       url: targetUser.avatarURL() || ru.embeds.serverInfo.thumbnail.url,
     };
     await interaction.reply({
       embeds: [
-        embedSetup(embedTitle, "", embedFields, 0x2f3136, embedThumbnailImage),
+        embedSetup(
+          embedTitle,
+          "",
+          embedFields,
+          embedColor,
+          embedThumbnailImage
+        ),
       ],
     });
   },
