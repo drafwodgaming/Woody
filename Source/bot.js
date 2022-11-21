@@ -13,10 +13,10 @@ const rest = new REST({ version: botConfig.bot.restVersion }).setToken(
 client.commands = new Collection();
 client.commandsArray = [];
 
-const handlersPath = path.join(__dirname, ru.bot.filepath.handlersPath);
+const handlersPath = path.join(__dirname, ru.bot.filePath.handlersPath);
 const handlersFiles = fileSystem
   .readdirSync(handlersPath)
-  .filter((file) => file.endsWith(ru.bot.filepath.jsFileExtension));
+  .filter((file) => file.endsWith(ru.bot.filePath.jsFileExtension));
 
 for (const file of handlersFiles) {
   const filePath = path.join(handlersPath, file);

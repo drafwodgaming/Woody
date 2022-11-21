@@ -5,10 +5,10 @@ const ru = require("../../Config/ru");
 module.exports = (client, sourcePath) => {
   client.commandsHandler = async () => {
     const { commands, commandsArray } = client;
-    const commandsPath = path.join(sourcePath, ru.bot.filepath.commandsPath);
+    const commandsPath = path.join(sourcePath, ru.bot.filePath.commandsPath);
     const commandsFiles = fileSystem
       .readdirSync(commandsPath)
-      .filter((file) => file.endsWith(ru.bot.filepath.jsFileExtension));
+      .filter((file) => file.endsWith(ru.bot.filePath.jsFileExtension));
 
     for (const file of commandsFiles) {
       const commandPath = path.join(commandsPath, file);

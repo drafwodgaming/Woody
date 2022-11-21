@@ -28,7 +28,8 @@ module.exports = {
         },
       },
     },
-    filepath: {
+
+    filePath: {
       handlersPath: "Handlers",
       jsFileExtension: ".js",
       commandsPath: "Commands",

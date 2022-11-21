@@ -4,10 +4,10 @@ const ru = require("../../Config/ru");
 
 module.exports = (client, sourcePath) => {
   client.eventsHandler = async () => {
-    const eventsPath = path.join(sourcePath, ru.bot.filepath.eventsPath);
+    const eventsPath = path.join(sourcePath, ru.bot.filePath.eventsPath);
     const eventsFiles = fileSystem
       .readdirSync(eventsPath)
-      .filter((file) => file.endsWith(ru.bot.filepath.jsFileExtension));
+      .filter((file) => file.endsWith(ru.bot.filePath.jsFileExtension));
 
     for (const file of eventsFiles) {
       const eventPath = path.join(eventsPath, file);
