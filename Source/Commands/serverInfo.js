@@ -22,7 +22,7 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: ИНФОРМАЦИЯ О СЕРВЕРЕ
      * ! --------------------------------
      */
-    const name = interaction.guild.name;
+    const serverName = interaction.guild.name;
     const ownerId = interaction.guild.ownerId;
     const createdTimestamp = parseInt(
       interaction.guild.createdTimestamp / 1000
@@ -33,23 +33,25 @@ module.exports = {
      * ! --------------------------------
      */
     const memberCount = interaction.guild.memberCount;
-    const members = interaction.guild.members.cache.filter(
+    const serverMembers = interaction.guild.members.cache.filter(
       (m) => !m.user.bot
     ).size;
-    const bots = interaction.guild.members.cache.filter((m) => m.user.bot).size;
+    const serverBots = interaction.guild.members.cache.filter(
+      (m) => m.user.bot
+    ).size;
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: КАНАЛЫ
      * ! --------------------------------
      */
-    const channels = interaction.guild.channels.cache.size;
+    const serverChannels = interaction.guild.channels.cache.size;
     const textChannels = interaction.guild.channels.cache.filter(
       (c) => c.type === ChannelType.GuildText
     ).size;
     const voiceChannels = interaction.guild.channels.cache.filter(
       (c) => c.type === ChannelType.GuildVoice
     ).size;
-    const categories = interaction.guild.channels.cache.filter(
+    const serverCategories = interaction.guild.channels.cache.filter(
       (c) => c.type === ChannelType.GuildCategory
     ).size;
     /**
@@ -86,7 +88,7 @@ module.exports = {
       {
         name: ru.embeds.serverInfo.fields.aboutServer.name,
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutServer.serverName} ${name}
+        ${ru.embeds.serverInfo.fields.aboutServer.serverName} ${serverName}
         ${ru.embeds.serverInfo.fields.aboutServer.owner} ${userMention(ownerId)}
         ${ru.embeds.serverInfo.fields.aboutServer.createdTime} ${time(
           createdTimestamp,
@@ -99,18 +101,18 @@ module.exports = {
           memberCount: memberCount,
         }),
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutMembers.serverMembers} ${members}
-        ${ru.embeds.serverInfo.fields.aboutMembers.serverBots} ${bots}
+        ${ru.embeds.serverInfo.fields.aboutMembers.serverMembers} ${serverMembers}
+        ${ru.embeds.serverInfo.fields.aboutMembers.serverBots} ${serverBots}
         `,
       },
       {
         name: mustache.render(ru.embeds.serverInfo.fields.aboutChannels.name, {
-          channels: channels,
+          channels: serverChannels,
         }),
         value: stripIndents`
         ${ru.embeds.serverInfo.fields.aboutChannels.serverTextChannels} ${textChannels}
         ${ru.embeds.serverInfo.fields.aboutChannels.serverVoiceChannels} ${voiceChannels}
-        ${ru.embeds.serverInfo.fields.aboutChannels.serverCategories} ${categories}
+        ${ru.embeds.serverInfo.fields.aboutChannels.serverCategories} ${serverCategories}
         `,
       },
       {
@@ -137,7 +139,7 @@ module.exports = {
       embeds: [
         embedSetup(
           embedTittle,
-          "",
+          undefined,
           embedFields,
           embedColors,
           embedThumbnailImage

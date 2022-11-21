@@ -25,14 +25,15 @@ module.exports = {
     const numMessages = interaction.options.get(
       ru.bot.commands.clear.option.name
     ).value;
-    /**я так и
+    /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: EMBED
      * ! --------------------------------
      */
     const messageDeletionLimit =
       ru.embeds.clear.description.messageDeletionLimit;
-    const cannotDeleteMsgs = ru.embeds.clear.description.cannotDeleteMsgs;
+    const incorrectNumberMessages =
+      ru.embeds.clear.description.incorrectNumberMessages;
     const messageDeleted = mustache.render(
       ru.embeds.clear.description.messageDeleted,
       {
@@ -49,18 +50,42 @@ module.exports = {
      */
     if (numMessages > 100) {
       return await interaction.reply({
-        embeds: [embedSetup("", messageDeletionLimit, "", errorColor, "")],
+        embeds: [
+          embedSetup(
+            undefined,
+            messageDeletionLimit,
+            undefined,
+            errorColor,
+            undefined
+          ),
+        ],
         ephemeral: true,
       });
     } else if (numMessages <= 0) {
       return await interaction.reply({
-        embeds: [embedSetup("", cannotDeleteMsgs, "", errorColor, "")],
+        embeds: [
+          embedSetup(
+            undefined,
+            incorrectNumberMessages,
+            undefined,
+            errorColor,
+            undefined
+          ),
+        ],
         ephemeral: true,
       });
     }
     await interaction.channel.bulkDelete(numMessages, true);
     await interaction.reply({
-      embeds: [embedSetup("", messageDeleted, "", successColor, "")],
+      embeds: [
+        embedSetup(
+          undefined,
+          messageDeleted,
+          undefined,
+          successColor,
+          undefined
+        ),
+      ],
       ephemeral: true,
     });
   },

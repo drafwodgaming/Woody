@@ -32,7 +32,7 @@ module.exports = {
     const guildMember = interaction.guild.members.cache.get(targetUser.id);
 
     const userCreatedAt = moment(targetUser.createdAt).format(
-      "dddd, DD.MM.YYYY HH:mm"
+      ru.time.defaultTimeFormat
     );
 
     const statusList = {
@@ -48,7 +48,7 @@ module.exports = {
      * ! --------------------------------
      */
     const memberJoinedAt = moment(guildMember.joinedAt).format(
-      "dddd, DD.MM.YYYY HH:mm"
+      ru.time.defaultTimeFormat
     );
     const memberRoles = guildMember.roles.cache
       .map((r) => r)
@@ -96,7 +96,7 @@ module.exports = {
       embeds: [
         embedSetup(
           embedTitle,
-          "",
+          undefined,
           embedFields,
           embedColor,
           embedThumbnailImage

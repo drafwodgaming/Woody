@@ -20,7 +20,7 @@ module.exports = {
         )
       )
       .catch((error) =>
-        console.log(chalk.redBright(ru.logs.errors.title)`${error}`)
+        console.log(chalk.redBright(ru.logs.errors.title)` ${error}`)
       );
 
     client.user.setPresence({

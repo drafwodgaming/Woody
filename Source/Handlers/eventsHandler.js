@@ -1,12 +1,13 @@
 const fileSystem = require("fs");
 const path = require("path");
+const ru = require("../../Config/ru");
 
 module.exports = (client, sourcePath) => {
   client.eventsHandler = async () => {
-    const eventsPath = path.join(sourcePath, "Events");
+    const eventsPath = path.join(sourcePath, ru.bot.filepath.eventsPath);
     const eventsFiles = fileSystem
       .readdirSync(eventsPath)
-      .filter((file) => file.endsWith(".js"));
+      .filter((file) => file.endsWith(ru.bot.filepath.jsFileExtension));
 
     for (const file of eventsFiles) {
       const eventPath = path.join(eventsPath, file);

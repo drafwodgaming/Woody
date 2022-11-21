@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, bold } = require("discord.js");
 const { embedSetup } = require("../functions/embedSetup");
 const ru = require("../../Config/ru");
+const botConfig = require("../../Config/botConfig");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,8 +13,9 @@ module.exports = {
       .map((command) => `/${bold(command.name)} \n ${command.description}\n`)
       .join("\n");
 
+    const embedColor = botConfig.embedColors.helpColor;
     await interaction.reply({
-      embeds: [embedSetup(embedTitle, embedDescription, "", 0xf6d065)],
+      embeds: [embedSetup(embedTitle, embedDescription, undefined, embedColor)],
       ephemeral: true,
     });
   },

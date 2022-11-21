@@ -1,13 +1,14 @@
 const fileSystem = require("fs");
 const path = require("path");
+const ru = require("../../Config/ru");
 
 module.exports = (client, sourcePath) => {
   client.commandsHandler = async () => {
     const { commands, commandsArray } = client;
-    const commandsPath = path.join(sourcePath, "Commands");
+    const commandsPath = path.join(sourcePath, ru.bot.filepath.commandsPath);
     const commandsFiles = fileSystem
       .readdirSync(commandsPath)
-      .filter((file) => file.endsWith(".js"));
+      .filter((file) => file.endsWith(ru.bot.filepath.jsFileExtension));
 
     for (const file of commandsFiles) {
       const commandPath = path.join(commandsPath, file);
