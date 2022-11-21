@@ -90,7 +90,7 @@ module.exports = {
     const embedColor = botConfig.embedColors.trancparent;
 
     const embedThumbnailImage = {
-      url: targetUser.avatarURL() || ru.embeds.serverInfo.thumbnail.url,
+      url: targetUser.avatarURL() || ru.embeds.images.noAva.url,
     };
     await interaction.reply({
       embeds: [

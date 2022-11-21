@@ -32,6 +32,7 @@ module.exports = {
     filePath: {
       handlersPath: "Handlers",
       jsFileExtension: ".js",
+      pngFileExtension: "png",
       commandsPath: "Commands",
       eventsPath: "Events",
     },
@@ -76,17 +77,14 @@ module.exports = {
           serverVoiceChannels: italic("- Голосовые :"),
           serverCategories: italic("- Категории :"),
         },
-        aboutEmoji: {
+        aboutEmojis: {
           name: "Эмодзи [ {{emojiCount}} ]",
-          serverAnimate: italic("- Анимированные :"),
-          serverStatic: italic("- Статичные :"),
+          emojiAnimate: italic("- Анимированные :"),
+          emojiStatic: italic("- Статичные :"),
         },
         aboutRoles: {
           name: "Роли [ {{serverRolesLength}} ]",
         },
-      },
-      thumbnail: {
-        url: "https://i.imgur.com/ZvDmhN9.png",
       },
     },
 
@@ -110,6 +108,11 @@ module.exports = {
           name: "Роли",
           noRoles: "нет ролей",
         },
+      },
+    },
+    images: {
+      noAva: {
+        url: "https://i.imgur.com/ZvDmhN9.png",
       },
     },
   },
@@ -139,5 +142,27 @@ module.exports = {
         "Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота",
     },
     defaultTimeFormat: "dddd, DD.MM.YYYY HH:mm",
+  },
+
+  memberCard: {
+    guildName: "THE RΞDΔCTΞD",
+    title: "title",
+    userNameBox: "username-box",
+    discriminatorBox: "discriminator-box",
+    messageBox: "message-box",
+    border: "border",
+    avatar: "avatar",
+    color: {
+      main: "#eb177e",
+      border: "#5409e8",
+    },
+    attachment: {
+      welcome: "welcome.png",
+      leave: "bye.png",
+    },
+    content: {
+      welcome: "**Приветствуем, <@{{ memberId }}>, добро пожаловать!**",
+      leave: "**Удачного пути Страж, <@{{ memberId }}>!**",
+    },
   },
 };

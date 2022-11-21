@@ -32,11 +32,11 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: ПОЛЬЗОВАТЕЛИ
      * ! --------------------------------
      */
-    const memberCount = interaction.guild.memberCount;
-    const serverMembers = interaction.guild.members.cache.filter(
+    const allGuildMembers = interaction.guild.memberCount;
+    const guildMembers = interaction.guild.members.cache.filter(
       (m) => !m.user.bot
     ).size;
-    const serverBots = interaction.guild.members.cache.filter(
+    const botsNumber = interaction.guild.members.cache.filter(
       (m) => m.user.bot
     ).size;
     /**
@@ -98,11 +98,11 @@ module.exports = {
       },
       {
         name: mustache.render(ru.embeds.serverInfo.fields.aboutMembers.name, {
-          memberCount: memberCount,
+          memberCount: allGuildMembers,
         }),
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutMembers.serverMembers} ${serverMembers}
-        ${ru.embeds.serverInfo.fields.aboutMembers.serverBots} ${serverBots}
+        ${ru.embeds.serverInfo.fields.aboutMembers.serverMembers} ${guildMembers}
+        ${ru.embeds.serverInfo.fields.aboutMembers.serverBots} ${botsNumber}
         `,
       },
       {
@@ -116,12 +116,12 @@ module.exports = {
         `,
       },
       {
-        name: mustache.render(ru.embeds.serverInfo.fields.aboutEmoji.name, {
+        name: mustache.render(ru.embeds.serverInfo.fields.aboutEmojis.name, {
           emojiCount: emojiCount,
         }),
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutEmoji.serverAnimate} ${emojisAnimate}
-        ${ru.embeds.serverInfo.fields.aboutEmoji.serverStatic} ${emojisStatic}
+        ${ru.embeds.serverInfo.fields.aboutEmojis.emojiAnimate} ${emojisAnimate}
+        ${ru.embeds.serverInfo.fields.aboutEmojis.emojiStatic} ${emojisStatic}
         `,
       },
       {
@@ -133,7 +133,7 @@ module.exports = {
     ];
     const embedColors = botConfig.embedColors.trancparent;
     const embedThumbnailImage = {
-      url: interaction.guild.iconURL() || ru.embeds.serverInfo.thumbnail.url,
+      url: interaction.guild.iconURL() || ru.embeds.images.noAva.url,
     };
     await interaction.reply({
       embeds: [
