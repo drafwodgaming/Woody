@@ -1,10 +1,7 @@
-const {
-  SlashCommandBuilder,
-  PermissionFlagsBits,
-  bold,
-} = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const ru = require("../../Config/ru");
+const mustache = require("mustache");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,29 +24,34 @@ module.exports = {
     const numMessages = interaction.options.get(
       ru.bot.commands.clear.option.name
     ).value;
-    /**
+    /**я так и
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: EMBED
      * ! --------------------------------
      */
-    const embedDescription = bold(ru.embeds.clear.description.value1);
-    const embedDescription2 = bold(ru.embeds.clear.description.value2);
-    const embedDescription3 = bold(ru.embeds.clear.description.value3);
-
+    const messageDeletionLimit =
+      ru.embeds.clear.description.messageDeletionLimit;
+    const cannotDeleteMsgs = ru.embeds.clear.description.cannotDeleteMsgs;
+    const messageDeleted = mustache.render(
+      ru.embeds.clear.description.messageDeleted,
+      {
+        numMessages: numMessages,
+      }
+    );
     if (numMessages > 100) {
       return await interaction.reply({
-        embeds: [embedSetup("", embedDescription, "", 0x2f3136, "")],
+        embeds: [embedSetup("", messageDeletionLimit, "", 0x2f3136, "")],
         ephemeral: true,
       });
     } else if (numMessages <= 0) {
       return await interaction.reply({
-        embeds: [embedSetup("", embedDescription2, "", 0x2f3136, "")],
+        embeds: [embedSetup("", cannotDeleteMsgs, "", 0x2f3136, "")],
         ephemeral: true,
       });
     }
     await interaction.channel.bulkDelete(numMessages, true);
     await interaction.reply({
-      embeds: [embedSetup("", embedDescription3, "", 0x2f3136, "")],
+      embeds: [embedSetup("", messageDeleted, "", 0x2f3136, "")],
       ephemeral: true,
     });
   },

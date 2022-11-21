@@ -33,4 +33,4 @@ async function setUpBot() {
   });
 }
 
-setUpBot().catch((error) => console.log(`${ru.errors.errorTitle} ${error}`));
+setUpBot().catch((error) => console.log(`${ru.logs.errors.title} ${error}`));

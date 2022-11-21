@@ -16,6 +16,7 @@
     "discord.js": "^14.6.0",
     "moment": "^2.29.4",
     "mongoose": "^6.7.2",
+    "mustache": "^4.2.0",
     "nodemon": "^2.0.20"
   }
 }

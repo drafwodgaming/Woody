@@ -15,10 +15,13 @@ module.exports = {
         useUnifiedTopology: true,
       })
       .then(() =>
-        console.log(chalk.blue("[DATABASE STATUS]:"), chalk.black("Connected."))
+        console.log(
+          chalk.blue(ru.logs.success.title.dbTitle),
+          chalk.black(ru.logs.success.body.dbConnected)
+        )
       )
       .catch((error) =>
-        console.log(chalk.redBright(ru.errors.errorTitle)`${error}`)
+        console.log(chalk.redBright(ru.logs.errors.title)`${error}`)
       );
 
     client.user.setPresence({

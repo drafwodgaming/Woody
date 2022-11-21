@@ -10,6 +10,7 @@ const {
 const { embedSetup } = require("../Functions/embedSetup");
 const { stripIndents } = require("common-tags");
 const ru = require("../../Config/ru");
+const mustache = require("mustache");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -85,43 +86,49 @@ module.exports = {
     const embedTittle = ru.embeds.serverInfo.title.name;
     const embedFields = [
       {
-        name: ru.embeds.serverInfo.fields.field1.name,
+        name: ru.embeds.serverInfo.fields.aboutServer.name,
         value: stripIndents`
-        ${bold(ru.embeds.serverInfo.fields.field1.value1)} ${name}
-        ${bold(ru.embeds.serverInfo.fields.field1.value2)} ${userMention(
-          ownerId
-        )}
-        ${bold(ru.embeds.serverInfo.fields.field1.value3)} ${time(
+        ${ru.embeds.serverInfo.fields.aboutServer.serverName} ${name}
+        ${ru.embeds.serverInfo.fields.aboutServer.owner} ${userMention(ownerId)}
+        ${ru.embeds.serverInfo.fields.aboutServer.createdTime} ${time(
           createdTimestamp,
           TimestampStyles.LongDate
         )}
         `,
       },
       {
-        name: `${ru.embeds.serverInfo.fields.field2.name} [ ${memberCount} ]`,
+        name: mustache.render(ru.embeds.serverInfo.fields.aboutMembers.name, {
+          memberCount: memberCount,
+        }),
         value: stripIndents`
-        ${italic(ru.embeds.serverInfo.fields.field2.value1)} : ${members}
-        ${italic(ru.embeds.serverInfo.fields.field2.value2)} : ${bots}
+        ${ru.embeds.serverInfo.fields.aboutMembers.serverMembers} ${members}
+        ${ru.embeds.serverInfo.fields.aboutMembers.serverBots} ${bots}
         `,
       },
       {
-        name: `${ru.embeds.serverInfo.fields.field3.name} [ ${channels} ]`,
+        name: mustache.render(ru.embeds.serverInfo.fields.aboutChannels.name, {
+          channels: channels,
+        }),
         value: stripIndents`
-        ${italic(ru.embeds.serverInfo.fields.field3.value1)} : ${textChannels}
-        ${italic(ru.embeds.serverInfo.fields.field3.value2)} : ${voiceChannels}
-        ${italic(ru.embeds.serverInfo.fields.field3.value3)} : ${categories}
+        ${ru.embeds.serverInfo.fields.aboutChannels.serverTextChannels} ${textChannels}
+        ${ru.embeds.serverInfo.fields.aboutChannels.serverVoiceChannels} ${voiceChannels}
+        ${ru.embeds.serverInfo.fields.aboutChannels.serverCategories} ${categories}
         `,
       },
       {
-        name: `${ru.embeds.serverInfo.fields.field4.name} [ ${emojiCount} ]`,
+        name: mustache.render(ru.embeds.serverInfo.fields.aboutEmoji.name, {
+          emojiCount: emojiCount,
+        }),
         value: stripIndents`
-        ${italic(ru.embeds.serverInfo.fields.field4.value1)} : ${emojisAnimate}
-        ${italic(ru.embeds.serverInfo.fields.field4.value2)} : ${emojisStatic}
+        ${ru.embeds.serverInfo.fields.aboutEmoji.serverAnimate} ${emojisAnimate}
+        ${ru.embeds.serverInfo.fields.aboutEmoji.serverStatic} ${emojisStatic}
         `,
       },
       {
-        name: `${ru.embeds.serverInfo.fields.field5.name} [ ${serverRolesLength} ]`,
-        value: `${serverRoles}`,
+        name: mustache.render(ru.embeds.serverInfo.fields.aboutRoles.name, {
+          serverRolesLength: serverRolesLength,
+        }),
+        value: serverRoles,
       },
     ];
     const embedThumbnailImage = {
