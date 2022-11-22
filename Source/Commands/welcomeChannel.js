@@ -1,8 +1,12 @@
-const { SlashCommandBuilder, ChannelType } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  ChannelType,
+  PermissionFlagsBits,
+} = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
 const ru = require("../../Config/ru");
-const welcomeChannelSchema = require("../Models/channelId");
+const welcomeChannelSchema = require("../Models/welcomeChannel");
 const mustache = require("mustache");
 
 module.exports = {
@@ -10,6 +14,7 @@ module.exports = {
     .setName(ru.bot.commands.welcomeChannel.name)
     .setDescription(ru.bot.commands.welcomeChannel.description)
     .setDMPermission(false)
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addChannelOption((option) =>
       option
         .setName(ru.bot.commands.welcomeChannel.option.name)
@@ -26,17 +31,17 @@ module.exports = {
       guildId: interactionGuildId,
     });
 
-    const editChannel = mustache.render(
+    const editChannelDescription = mustache.render(
       ru.embeds.welcomeChannel.description.editedChannel,
       {
-        interactionChannelId: interactionChannel,
+        interactionChannelId: interactionChannel.id,
       }
     );
 
-    const installedChannel = mustache.render(
+    const installedChannelDescription = mustache.render(
       ru.embeds.welcomeChannel.description.installedChannel,
       {
-        interactionChannelId: interactionChannel,
+        interactionChannelId: interactionChannel.id,
       }
     );
     const embedColor = botConfig.embedColors.success;
@@ -46,7 +51,9 @@ module.exports = {
       welcomeChannel.guildId = interactionGuildId;
       await welcomeChannel.save();
       await interaction.reply({
-        embeds: [embedSetup(undefined, editChannel, undefined, embedColor)],
+        embeds: [
+          embedSetup(undefined, editChannelDescription, undefined, embedColor),
+        ],
         ephemeral: true,
       });
       return;
@@ -58,7 +65,14 @@ module.exports = {
     });
     await newChannelId.save();
     await interaction.reply({
-      embeds: [embedSetup(undefined, installedChannel, undefined, embedColor)],
+      embeds: [
+        embedSetup(
+          undefined,
+          installedChannelDescription,
+          undefined,
+          embedColor
+        ),
+      ],
       ephemeral: true,
     });
   },

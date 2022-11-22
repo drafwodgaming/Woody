@@ -36,10 +36,10 @@ module.exports = {
     );
 
     const statusList = {
-      online: "В сети",
-      idle: "Отошел",
-      offline: "Не в сети",
-      dnd: "Не трогать",
+      online: ru.bot.presence.status.online,
+      idle: ru.bot.presence.status.idle,
+      offline: ru.bot.presence.status.offline,
+      dnd: ru.bot.presence.status.dnd,
     };
 
     /**
@@ -51,9 +51,9 @@ module.exports = {
       ru.time.defaultTimeFormat
     );
     const memberRoles = guildMember.roles.cache
-      .map((r) => r)
+      .map((role) => role)
       .sort((a, b) => b.position - a.position)
-      .filter((r) => r.id != interaction.guild.id)
+      .filter((role) => role.id != interaction.guild.id)
       .join(" ");
 
     /**
@@ -71,7 +71,9 @@ module.exports = {
         ${ru.embeds.userInfo.fields.aboutUser.createdTime} \`${userCreatedAt}\`
         ${ru.embeds.userInfo.fields.aboutUser.userStatus} ${
           statusList[
-            guildMember.presence ? guildMember.presence.status : "offline"
+            guildMember.presence
+              ? guildMember.presence.status
+              : ru.bot.presence.offline
           ]
         }
         `,

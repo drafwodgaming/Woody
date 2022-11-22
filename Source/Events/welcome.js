@@ -3,7 +3,7 @@ const { Events, AttachmentBuilder } = require("discord.js");
 const memberCardBackground = require("../../Config/memberCardBackground");
 const mustache = require("mustache");
 const ru = require("../../Config/ru");
-const welcomeChannelSchema = require("../Models/channelId");
+const welcomeChannelSchema = require("../Models/welcomeChannel");
 
 module.exports = {
   name: Events.GuildMemberAdd,
@@ -11,7 +11,8 @@ module.exports = {
     const interactionChannelId = await welcomeChannelSchema.findOne({
       guildId: member.guild.id,
     });
-    const channelWelcome = member.guild.channels.cache.find(
+    if (!interactionChannelId) return;
+    const welcomeChannel = member.guild.channels.cache.find(
       (channel) => channel.id === interactionChannelId.channelId
     );
 
@@ -34,6 +35,6 @@ module.exports = {
       name: ru.memberCard.attachment.welcome,
     });
 
-    channelWelcome.send({ files: [attachment] });
+    welcomeChannel.send({ files: [attachment] });
   },
 };

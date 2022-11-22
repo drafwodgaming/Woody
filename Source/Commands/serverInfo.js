@@ -34,10 +34,10 @@ module.exports = {
      */
     const allGuildMembers = interaction.guild.memberCount;
     const guildMembers = interaction.guild.members.cache.filter(
-      (m) => !m.user.bot
+      (member) => !member.user.bot
     ).size;
     const botsNumber = interaction.guild.members.cache.filter(
-      (m) => m.user.bot
+      (member) => member.user.bot
     ).size;
     /**
      * ! --------------------------------
@@ -46,13 +46,13 @@ module.exports = {
      */
     const serverChannels = interaction.guild.channels.cache.size;
     const textChannels = interaction.guild.channels.cache.filter(
-      (c) => c.type === ChannelType.GuildText
+      (channel) => channel.type === ChannelType.GuildText
     ).size;
     const voiceChannels = interaction.guild.channels.cache.filter(
-      (c) => c.type === ChannelType.GuildVoice
+      (channel) => channel.type === ChannelType.GuildVoice
     ).size;
     const serverCategories = interaction.guild.channels.cache.filter(
-      (c) => c.type === ChannelType.GuildCategory
+      (channel) => channel.type === ChannelType.GuildCategory
     ).size;
     /**
      * ! --------------------------------
@@ -61,10 +61,10 @@ module.exports = {
      */
     const emojiCount = interaction.guild.emojis.cache.size;
     const emojisAnimate = interaction.guild.emojis.cache.filter(
-      (e) => e.animated
+      (emoji) => emoji.animated
     ).size;
     const emojisStatic = interaction.guild.emojis.cache.filter(
-      (e) => !e.animated
+      (emoji) => !emoji.animated
     ).size;
     /**
      * ! --------------------------------
@@ -133,7 +133,7 @@ module.exports = {
     ];
     const embedColors = botConfig.embedColors.trancparent;
     const embedThumbnailImage = {
-      url: interaction.guild.iconURL() || ru.embeds.images.noAva.url,
+      url: interaction.guild.iconURL() || ru.embeds.images.emptyAva.url,
     };
     await interaction.reply({
       embeds: [

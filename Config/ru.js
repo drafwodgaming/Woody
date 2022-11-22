@@ -1,4 +1,4 @@
-const { bold, italic } = require("discord.js");
+const { bold, italic, channelMention } = require("discord.js");
 
 module.exports = {
   bot: {
@@ -43,6 +43,15 @@ module.exports = {
       pngFileExtension: "png",
       commandsPath: "Commands",
       eventsPath: "Events",
+    },
+    presence: {
+      status: {
+        online: "В сети",
+        idle: "Отошел",
+        offline: "Не в сети",
+        dnd: "Не беспокоить",
+      },
+      offline: "offline",
     },
   },
 
@@ -120,15 +129,15 @@ module.exports = {
     welcomeChannel: {
       description: {
         editedChannel: bold(
-          "Канал был изменён на <#{{interactionChannelId.id}}>"
+          `Канал был изменён на ${channelMention("{{interactionChannelId}}")}`
         ),
         installedChannel: bold(
-          `Канал был установлен на <#{{interactionChannelId.id}}>`
+          `Канал установлен на ${channelMention("{{interactionChannelId}}")}`
         ),
       },
     },
     images: {
-      noAva: {
+      empyAva: {
         url: "https://i.imgur.com/ZvDmhN9.png",
       },
     },

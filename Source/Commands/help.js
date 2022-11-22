@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, bold } = require("discord.js");
-const { embedSetup } = require("../functions/embedSetup");
+const { embedSetup } = require("../Functions/embedSetup");
 const ru = require("../../Config/ru");
 const botConfig = require("../../Config/botConfig");
 
