@@ -27,6 +27,14 @@ module.exports = {
           description: "Пользователи",
         },
       },
+      welcomeChannel: {
+        name: "welcomechannel",
+        description: "Выбрать канал для приветственных сообщений",
+        option: {
+          name: "channel",
+          description: "Каналы",
+        },
+      },
     },
 
     filePath: {
@@ -87,7 +95,6 @@ module.exports = {
         },
       },
     },
-
     userInfo: {
       title: {
         name: "О пользователе",
@@ -108,6 +115,16 @@ module.exports = {
           name: "Роли",
           noRoles: "нет ролей",
         },
+      },
+    },
+    welcomeChannel: {
+      description: {
+        editedChannel: bold(
+          "Канал был изменён на <#{{interactionChannelId.id}}>"
+        ),
+        installedChannel: bold(
+          `Канал был установлен на <#{{interactionChannelId.id}}>`
+        ),
       },
     },
     images: {
@@ -145,24 +162,18 @@ module.exports = {
   },
 
   memberCard: {
-    guildName: "THE RΞDΔCTΞD",
+    guildName: "{{guildName}}",
     title: "title",
     userNameBox: "username-box",
     discriminatorBox: "discriminator-box",
     messageBox: "message-box",
-    border: "border",
     avatar: "avatar",
     color: {
-      main: "#eb177e",
-      border: "#5409e8",
+      userBox: "#000000",
+      main: "#ffffff",
     },
     attachment: {
       welcome: "welcome.png",
-      leave: "bye.png",
-    },
-    content: {
-      welcome: "**Приветствуем, <@{{ memberId }}>, добро пожаловать!**",
-      leave: "**Удачного пути Страж, <@{{ memberId }}>!**",
     },
   },
 };

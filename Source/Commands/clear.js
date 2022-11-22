@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const { embedSetup } = require("../Functions/embedSetup");
-const ru = require("../../Config/ru");
 const mustache = require("mustache");
+const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
+const ru = require("../../Config/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -3,16 +3,17 @@ const { Events, AttachmentBuilder } = require("discord.js");
 const memberCardBackground = require("../../Config/memberCardBackground");
 const mustache = require("mustache");
 const ru = require("../../Config/ru");
-const { embedSetup } = require("../Functions/embedSetup");
+const welcomeChannelSchema = require("../Models/channelId");
 
 module.exports = {
   name: Events.GuildMemberAdd,
-  async execute(member, interaction) {
-    const channel = member.guild.channels.cache.find(
-      (channel) => channel.id === "1042892281776185431"
+  async execute(member) {
+    const interactionChannelId = await welcomeChannelSchema.findOne({
+      guildId: member.guild.id,
+    });
+    const channelWelcome = member.guild.channels.cache.find(
+      (channel) => channel.id === interactionChannelId.channelId
     );
-
-    if (!channel) return;
 
     const randomIndex = Math.floor(Math.random() * memberCardBackground.length);
 
@@ -21,11 +22,7 @@ module.exports = {
       .setDiscriminator(member.user.discriminator)
       .setMemberCount(member.guild.memberCount)
       .setColor(ru.memberCard.title, ru.memberCard.color.main)
-      .setColor(ru.memberCard.userNameBox, ru.memberCard.color.main)
-      .setColor(ru.memberCard.discriminatorBox, ru.memberCard.color.main)
-      .setColor(ru.memberCard.messageBox, ru.memberCard.color.main)
-      .setColor(ru.memberCard.border, ru.memberCard.color.border)
-      .setColor(ru.memberCard.avatar, ru.memberCard.color.border)
+      .setColor(ru.memberCard.userNameBox, ru.memberCard.color.userBox)
       .setAvatar(
         member.user.displayAvatarURL({
           format: ru.bot.filePath.pngFileExtension,
@@ -37,12 +34,6 @@ module.exports = {
       name: ru.memberCard.attachment.welcome,
     });
 
-    channel.send({
-      content: mustache.render(ru.memberCard.content.welcome, {
-        memberId: member.id,
-      }),
-      files: [attachment],
-    });
-    await embedSetup("", member, "", "", "");
+    channelWelcome.send({ files: [attachment] });
   },
 };
