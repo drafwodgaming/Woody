@@ -42,7 +42,6 @@ module.exports = {
     );
     const errorColor = botConfig.embedColors.error;
     const successColor = botConfig.embedColors.success;
-
     /**
      * ! --------------------------------
      * ! ПРОВЕРКА НА КОЛИЧЕСТВО ВВЕДЁЕННЫХ СООБЩЕНИЙ
@@ -75,6 +74,11 @@ module.exports = {
         ephemeral: true,
       });
     }
+    /**
+     * ! --------------------------------
+     * ! УДАЛЕНИЕ СООБЩЕНИЙ
+     * ! --------------------------------
+     */
     await interaction.channel.bulkDelete(numMessages, true);
     await interaction.reply({
       embeds: [

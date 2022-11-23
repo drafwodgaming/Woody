@@ -1,7 +1,7 @@
 const canvacord = require("canvacord");
 const { Events, AttachmentBuilder } = require("discord.js");
 const memberCardBackground = require("../../Config/memberCardBackground");
-const mustache = require("mustache");
+const chalk = require("chalk");
 const ru = require("../../Config/ru");
 const welcomeChannelSchema = require("../Models/welcomeChannel");
 

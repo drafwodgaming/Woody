@@ -27,12 +27,26 @@ module.exports = {
           description: "Пользователи",
         },
       },
-      welcomeChannel: {
-        name: "welcomechannel",
-        description: "Выбрать канал для приветственных сообщений",
-        option: {
-          name: "channel",
-          description: "Каналы",
+      setupChannel: {
+        name: "setup",
+        description: "Настроить каналы",
+
+        welcomeChannel: {
+          name: "welcome",
+          description:
+            "Выбрать канал для приветственных сообщений [ АДМИНИСТРАТОР ]",
+          option: {
+            name: "channel",
+            description: "Канал для приветствия",
+          },
+        },
+        logChannel: {
+          name: "log",
+          description: "Выбрать канал для логов [ АДМИНИСТРАТОР ]",
+          option: {
+            name: "channel",
+            description: "Канал для логов",
+          },
         },
       },
     },
@@ -126,16 +140,37 @@ module.exports = {
         },
       },
     },
+
     welcomeChannel: {
       description: {
         editedChannel: bold(
-          `Канал был изменён на ${channelMention("{{interactionChannelId}}")}`
+          `Канал приветствия изменён на ${channelMention(
+            "{{interactionChannelId}}"
+          )}`
         ),
         installedChannel: bold(
-          `Канал установлен на ${channelMention("{{interactionChannelId}}")}`
+          `Канал приветствия установлен на ${channelMention(
+            "{{interactionChannelId}}"
+          )}`
         ),
       },
     },
+
+    logChannel: {
+      description: {
+        editedChannel: bold(
+          `Канал для логов изменён на ${channelMention(
+            "{{interactionChannelId}}"
+          )}`
+        ),
+        installedChannel: bold(
+          `Канал для логов установлен на ${channelMention(
+            "{{interactionChannelId}}"
+          )}`
+        ),
+      },
+    },
+
     images: {
       empyAva: {
         url: "https://i.imgur.com/ZvDmhN9.png",
