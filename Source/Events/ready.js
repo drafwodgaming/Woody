@@ -1,4 +1,4 @@
-const { Events, ActivityType } = require("discord.js");
+const { Events } = require("discord.js");
 const botConfig = require("../../Config/botConfig");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
@@ -15,13 +15,11 @@ module.exports = {
       })
       .then(() =>
         console.log(
-          chalk.blue(ru.logs.success.title.dbTitle),
-          chalk.black(ru.logs.success.body.dbConnected)
+          ru.logs.success.title.dbTitle,
+          ru.logs.success.body.dbConnected
         )
       )
-      .catch((error) =>
-        console.log(chalk.redBright(ru.logs.errors.title)` ${error}`)
-      );
+      .catch((error) => console.log(ru.logs.errors.title, error));
 
     client.user.setPresence({
       status: botConfig.bot.presence.status,

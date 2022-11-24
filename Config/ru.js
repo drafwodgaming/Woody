@@ -1,4 +1,5 @@
 const { bold, italic, channelMention } = require("discord.js");
+const chalk = require("chalk");
 
 module.exports = {
   bot: {
@@ -180,18 +181,19 @@ module.exports = {
 
   logs: {
     errors: {
-      title: "[ERROR] ❯",
+      title: chalk.red("[ERROR] ❯"),
       body: {
+        errorConsole: chalk.red("{{error}}"),
         errorCallCommand: "Произошла ошибка при вызове этой команды!",
       },
     },
     success: {
       title: {
-        dbTitle: "[DATABASE STATUS] ❯",
-        logsTitle: "[LOGS] ❯",
+        dbTitle: chalk.blue("[DATABASE STATUS] ❯"),
+        logsTitle: chalk.green("[LOGS] ❯"),
       },
       body: {
-        dbConnected: "Connected",
+        dbConnected: chalk.black("Connected"),
       },
     },
   },
@@ -206,7 +208,6 @@ module.exports = {
   },
 
   memberCard: {
-    guildName: "{{guildName}}",
     title: "title",
     userNameBox: "username-box",
     discriminatorBox: "discriminator-box",
