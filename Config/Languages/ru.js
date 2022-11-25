@@ -100,19 +100,19 @@ module.exports = {
         },
         aboutMembers: {
           name: "Пользователи [ {{memberCount}} ]",
-          serverMembers: italic("- Люди :"),
-          serverBots: italic("- Боты :"),
+          serverMembers: "<:B5:1045606688742440970>Люди :",
+          serverBots: "<:B5:1045606688742440970>Боты :",
         },
         aboutChannels: {
           name: "Каналы [ {{channels}} ]",
-          serverTextChannels: italic("- Текстовые :"),
-          serverVoiceChannels: italic("- Голосовые :"),
-          serverCategories: italic("- Категории :"),
+          serverTextChannels: "<:B5:1045606688742440970>Текстовые :",
+          serverVoiceChannels: "<:B5:1045606688742440970>Голосовые :",
+          serverCategories: "<:B5:1045606688742440970>Категории :",
         },
         aboutEmojis: {
           name: "Эмодзи [ {{emojiCount}} ]",
-          emojiAnimate: italic("- Анимированные :"),
-          emojiStatic: italic("- Статичные :"),
+          emojiAnimate: "<:B5:1045606688742440970>Анимированные :",
+          emojiStatic: "<:B5:1045606688742440970>Статичные :",
         },
         aboutRoles: {
           name: "Роли [ {{serverRolesLength}} ]",
@@ -126,14 +126,14 @@ module.exports = {
       fields: {
         aboutUser: {
           name: "Информация о пользователе",
-          nickname: italic("- Никнейм :"),
-          userId: italic("- ID :"),
-          createdTime: italic("- Зарегистрирован :"),
-          userStatus: italic("- Статус :"),
+          nickname: "<:B5:1045606688742440970>Никнейм :",
+          userId: "<:B5:1045606688742440970>ID :",
+          createdTime: "<:B5:1045606688742440970>Зарегистрирован :",
+          userStatus: "<:B5:1045606688742440970>Статус :",
         },
         aboutMember: {
           name: "Информация об участнике",
-          joinedTime: italic("- Присоединился к серверу :"),
+          joinedTime: "<:B4:1045606684871106600>Присоединился к серверу :",
         },
         memberRoles: {
           name: "Роли",
@@ -145,12 +145,12 @@ module.exports = {
     welcomeChannel: {
       description: {
         editedChannel: bold(
-          `Канал приветствия изменён на ${channelMention(
+          `<:bot:1045603649340063814> Канал приветствия изменён на ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
         installedChannel: bold(
-          `Канал приветствия установлен на ${channelMention(
+          `<:bot:1045603649340063814> Канал приветствия установлен на ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
@@ -160,12 +160,12 @@ module.exports = {
     logChannel: {
       description: {
         editedChannel: bold(
-          `Канал для логов изменён на ${channelMention(
+          `<:bot:1045603649340063814> Канал для логов изменён на ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
         installedChannel: bold(
-          `Канал для логов установлен на ${channelMention(
+          `<:bot:1045603649340063814> Канал для логов установлен на ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
@@ -175,6 +175,14 @@ module.exports = {
     images: {
       empyAva: {
         url: "https://i.imgur.com/ZvDmhN9.png",
+      },
+    },
+
+    loading: {
+      description: {
+        loadingInfo: bold(
+          "<a:circle_loading:1045638284891656234> Загрузка данных"
+        ),
       },
     },
   },

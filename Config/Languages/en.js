@@ -18,11 +18,11 @@ module.exports = {
       },
       serverInfo: {
         name: "serverinfo",
-        description: "Info about the server",
+        description: "Information server",
       },
       userInfo: {
         name: "userinfo",
-        description: "Info about a user",
+        description: "Information user",
         option: {
           name: "user",
           description: "Users",
@@ -61,10 +61,10 @@ module.exports = {
     },
     presence: {
       status: {
-        online: "В сети",
-        idle: "Отошел",
-        offline: "Не в сети",
-        dnd: "Не беспокоить",
+        online: "Online",
+        idle: "Idle",
+        offline: "Offline",
+        dnd: "Do Not Disturb",
       },
       offline: "offline",
     },
@@ -74,70 +74,70 @@ module.exports = {
     clear: {
       description: {
         messageDeletionLimit: bold(
-          "❌ Вы не можете удалить больше 100 сообщений!"
+          "❌ You cannot delete more than 100 messages!"
         ),
         incorrectNumberMessages: bold(
-          "❌ Удаление отрицательных и нулевых сообщений невозможно!"
+          "❌ You cannot delete negative and zero messages!"
         ),
-        messageDeleted: bold("{{numMessages}} сообщений удалены"),
+        messageDeleted: bold("{{numMessages}} messages deleted"),
       },
     },
     help: {
       title: {
-        name: "Команды",
+        name: "Help menu",
       },
     },
     serverInfo: {
       title: {
-        name: "О сервере",
+        name: "About server",
       },
       fields: {
         aboutServer: {
-          name: "Информация о сервере",
-          serverName: bold("Название :"),
-          owner: bold("Создатель :"),
-          createdTime: bold("Создан :"),
+          name: "Information server",
+          serverName: bold("Server name :"),
+          owner: bold("Owner :"),
+          createdTime: bold("Created at :"),
         },
         aboutMembers: {
-          name: "Пользователи [ {{memberCount}} ]",
-          serverMembers: italic("- Люди :"),
-          serverBots: italic("- Боты :"),
+          name: "Members [ {{memberCount}} ]",
+          serverMembers: "<:B5:1045606688742440970>Users :",
+          serverBots: "<:B5:1045606688742440970>Bots :",
         },
         aboutChannels: {
-          name: "Каналы [ {{channels}} ]",
-          serverTextChannels: italic("- Текстовые :"),
-          serverVoiceChannels: italic("- Голосовые :"),
-          serverCategories: italic("- Категории :"),
+          name: "Channels [ {{channels}} ]",
+          serverTextChannels: "<:B5:1045606688742440970>Text channels :",
+          serverVoiceChannels: "<:B5:1045606688742440970>Voice channels :",
+          serverCategories: "<:B5:1045606688742440970>Categories :",
         },
         aboutEmojis: {
-          name: "Эмодзи [ {{emojiCount}} ]",
-          emojiAnimate: italic("- Анимированные :"),
-          emojiStatic: italic("- Статичные :"),
+          name: "Emojis [ {{emojiCount}} ]",
+          emojiAnimate: "<:B5:1045606688742440970>Animate :",
+          emojiStatic: "<:B5:1045606688742440970>Static :",
         },
         aboutRoles: {
-          name: "Роли [ {{serverRolesLength}} ]",
+          name: "Roles [ {{serverRolesLength}} ]",
         },
       },
     },
     userInfo: {
       title: {
-        name: "О пользователе",
+        name: "User Info",
       },
       fields: {
         aboutUser: {
-          name: "Информация о пользователе",
-          nickname: italic("- Никнейм :"),
-          userId: italic("- ID :"),
-          createdTime: italic("- Зарегистрирован :"),
-          userStatus: italic("- Статус :"),
+          name: "About user",
+          nickname: "<:B5:1045606688742440970>Nickname :",
+          userId: "<:B5:1045606688742440970>ID :",
+          createdTime: "<:B5:1045606688742440970>Created at :",
+          userStatus: "<:B5:1045606688742440970>Status :",
         },
         aboutMember: {
-          name: "Информация об участнике",
-          joinedTime: italic("- Присоединился к серверу :"),
+          name: "About member",
+          joinedTime: "<:B5:1045606688742440970>Joined at :",
         },
         memberRoles: {
-          name: "Роли",
-          noRoles: "нет ролей",
+          name: "Roles",
+          noRoles: "no roles",
         },
       },
     },
@@ -145,12 +145,12 @@ module.exports = {
     welcomeChannel: {
       description: {
         editedChannel: bold(
-          `Канал приветствия изменён на ${channelMention(
+          `<:bot:1045603649340063814> Welcome channel was changed at ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
         installedChannel: bold(
-          `Канал приветствия установлен на ${channelMention(
+          `<:bot:1045603649340063814> Welcome channel is set at  ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
@@ -160,12 +160,12 @@ module.exports = {
     logChannel: {
       description: {
         editedChannel: bold(
-          `Канал для логов изменён на ${channelMention(
+          `<:bot:1045603649340063814> Logs channel was changed at ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
         installedChannel: bold(
-          `Канал для логов установлен на ${channelMention(
+          `<:bot:1045603649340063814> Logs channel is set at ${channelMention(
             "{{interactionChannelId}}"
           )}`
         ),
@@ -183,7 +183,7 @@ module.exports = {
     errors: {
       title: chalk.red("[ERROR] ❯"),
       body: {
-        errorCallCommand: "Произошла ошибка при вызове этой команды!",
+        errorCallCommand: "An error occurred while calling this command!",
       },
     },
     success: {
@@ -201,7 +201,7 @@ module.exports = {
     moment: {
       momentLocale: "ru",
       momentWeekList:
-        "Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота",
+        "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday",
     },
     defaultTimeFormat: "dddd, DD.MM.YYYY HH:mm",
   },

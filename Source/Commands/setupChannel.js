@@ -5,27 +5,28 @@ const {
 } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
-const ru = require("../../Config/Languages/ru");
 const welcomeChannelSchema = require("../Models/welcomeChannel");
 const logChannelSchema = require("../Models/logChannel");
 const mustache = require("mustache");
+const locales = require("../Functions/locales");
 const en = require("../../Config/Languages/en");
+const ru = require("../../Config/Languages/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(ru.bot.commands.setupChannel.name)
-    .setDescription(ru.bot.commands.setupChannel.description)
+    .setName(en.bot.commands.setupChannel.name)
+    .setDescription(en.bot.commands.setupChannel.description)
     .setDMPermission(false)
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addSubcommand((subcommand) =>
       subcommand
-        .setName(ru.bot.commands.setupChannel.welcomeChannel.name)
-        .setDescription(ru.bot.commands.setupChannel.welcomeChannel.description)
+        .setName(en.bot.commands.setupChannel.welcomeChannel.name)
+        .setDescription(en.bot.commands.setupChannel.welcomeChannel.description)
         .addChannelOption((option) =>
           option
-            .setName(ru.bot.commands.setupChannel.welcomeChannel.option.name)
+            .setName(en.bot.commands.setupChannel.welcomeChannel.option.name)
             .setDescription(
-              ru.bot.commands.setupChannel.welcomeChannel.option.description
+              en.bot.commands.setupChannel.welcomeChannel.option.description
             )
             .addChannelTypes(ChannelType.GuildText)
             .setRequired(true)
@@ -33,14 +34,14 @@ module.exports = {
     )
     .addSubcommand((subcommand) =>
       subcommand
-        .setName(ru.bot.commands.setupChannel.logChannel.name)
-        .setDescription(ru.bot.commands.setupChannel.logChannel.description)
+        .setName(en.bot.commands.setupChannel.logChannel.name)
+        .setDescription(en.bot.commands.setupChannel.logChannel.description)
 
         .addChannelOption((option) =>
           option
-            .setName(ru.bot.commands.setupChannel.logChannel.option.name)
+            .setName(en.bot.commands.setupChannel.logChannel.option.name)
             .setDescription(
-              ru.bot.commands.setupChannel.logChannel.option.description
+              en.bot.commands.setupChannel.logChannel.option.description
             )
             .addChannelTypes(ChannelType.GuildText)
             .setRequired(true)
@@ -60,14 +61,16 @@ module.exports = {
           });
 
           const editChannelDescription = mustache.render(
-            ru.embeds.welcomeChannel.description.editedChannel,
+            locales[interaction.locale].embeds.welcomeChannel.description
+              .editedChannel,
             {
               interactionChannelId: interactionChannel.id,
             }
           );
 
           const installedChannelDescription = mustache.render(
-            ru.embeds.welcomeChannel.description.installedChannel,
+            locales[interaction.locale].embeds.welcomeChannel.description
+              .installedChannel,
             {
               interactionChannelId: interactionChannel.id,
             }
@@ -118,14 +121,16 @@ module.exports = {
           });
 
           const editChannelDescription = mustache.render(
-            ru.embeds.logChannel.description.editedChannel,
+            locales[interaction.locale].embeds.logChannel.description
+              .editedChannel,
             {
               interactionChannelId: interactionChannel.id,
             }
           );
 
           const installedChannelDescription = mustache.render(
-            ru.embeds.logChannel.description.installedChannel,
+            locales[interaction.locale].embeds.logChannel.description
+              .installedChannel,
             {
               interactionChannelId: interactionChannel.id,
             }

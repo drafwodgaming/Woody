@@ -1,15 +1,19 @@
 const { SlashCommandBuilder, bold } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
-const ru = require("../../Config/Languages/ru");
 const botConfig = require("../../Config/botConfig");
 const en = require("../../Config/Languages/en");
+const ru = require("../../Config/Languages/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(ru.bot.commands.help.name)
-    .setDescription(ru.bot.commands.help.description),
+    .setName(en.bot.commands.help.name)
+    .setDescription(en.bot.commands.help.description)
+    .setDescriptionLocalizations({
+      ru: ru.bot.commands.help.description,
+      uk: ru.bot.commands.help.description,
+    }),
   async execute(interaction) {
-    const embedTitle = ru.embeds.help.title.name;
+    const embedTitle = en.embeds.help.title.name;
     const embedDescription = interaction.client.commandsArray
       .map((command) => `/${bold(command.name)} \n ${command.description}\n`)
       .join("\n");

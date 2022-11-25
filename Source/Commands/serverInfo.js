@@ -7,15 +7,20 @@ const {
 } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const { stripIndents } = require("common-tags");
-const ru = require("../../Config/Languages/ru");
 const mustache = require("mustache");
 const botConfig = require("../../Config/botConfig");
+const locales = require("../Functions/locales");
 const en = require("../../Config/Languages/en");
+const ru = require("../../Config/Languages/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(ru.bot.commands.serverInfo.name)
-    .setDescription(ru.bot.commands.serverInfo.description)
+    .setName(en.bot.commands.serverInfo.name)
+    .setDescription(en.bot.commands.serverInfo.description)
+    .setDescriptionLocalizations({
+      ru: ru.bot.commands.userInfo.description,
+      uk: ru.bot.commands.userInfo.description,
+    })
     .setDMPermission(false),
   async execute(interaction) {
     /**
@@ -84,55 +89,97 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: EMBED
      * ! --------------------------------
      */
-    const embedTittle = ru.embeds.serverInfo.title.name;
+    const embedTittle =
+      locales[interaction.locale].embeds.serverInfo.title.name;
     const embedFields = [
       {
-        name: ru.embeds.serverInfo.fields.aboutServer.name,
+        name: locales[interaction.locale].embeds.serverInfo.fields.aboutServer
+          .name,
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutServer.serverName} ${serverName}
-        ${ru.embeds.serverInfo.fields.aboutServer.owner} ${userMention(ownerId)}
-        ${ru.embeds.serverInfo.fields.aboutServer.createdTime} ${time(
-          createdTimestamp,
-          TimestampStyles.LongDate
-        )}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutServer
+            .serverName
+        } ${serverName}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutServer.owner
+        } ${userMention(ownerId)}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutServer
+            .createdTime
+        } ${time(createdTimestamp, TimestampStyles.LongDate)}
         `,
       },
       {
-        name: mustache.render(ru.embeds.serverInfo.fields.aboutMembers.name, {
-          memberCount: allGuildMembers,
-        }),
+        name: mustache.render(
+          locales[interaction.locale].embeds.serverInfo.fields.aboutMembers
+            .name,
+          {
+            memberCount: allGuildMembers,
+          }
+        ),
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutMembers.serverMembers} ${guildMembers}
-        ${ru.embeds.serverInfo.fields.aboutMembers.serverBots} ${botsNumber}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutMembers
+            .serverMembers
+        } ${guildMembers}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutMembers
+            .serverBots
+        } ${botsNumber}
         `,
       },
       {
-        name: mustache.render(ru.embeds.serverInfo.fields.aboutChannels.name, {
-          channels: serverChannels,
-        }),
+        name: mustache.render(
+          locales[interaction.locale].embeds.serverInfo.fields.aboutChannels
+            .name,
+          {
+            channels: serverChannels,
+          }
+        ),
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutChannels.serverTextChannels} ${textChannels}
-        ${ru.embeds.serverInfo.fields.aboutChannels.serverVoiceChannels} ${voiceChannels}
-        ${ru.embeds.serverInfo.fields.aboutChannels.serverCategories} ${serverCategories}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutChannels
+            .serverTextChannels
+        } ${textChannels}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutChannels
+            .serverVoiceChannels
+        } ${voiceChannels}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutChannels
+            .serverCategories
+        } ${serverCategories}
         `,
       },
       {
-        name: mustache.render(ru.embeds.serverInfo.fields.aboutEmojis.name, {
-          emojiCount: emojiCount,
-        }),
+        name: mustache.render(
+          locales[interaction.locale].embeds.serverInfo.fields.aboutEmojis.name,
+          {
+            emojiCount: emojiCount,
+          }
+        ),
         value: stripIndents`
-        ${ru.embeds.serverInfo.fields.aboutEmojis.emojiAnimate} ${emojisAnimate}
-        ${ru.embeds.serverInfo.fields.aboutEmojis.emojiStatic} ${emojisStatic}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutEmojis
+            .emojiAnimate
+        } ${emojisAnimate}
+        ${
+          locales[interaction.locale].embeds.serverInfo.fields.aboutEmojis
+            .emojiStatic
+        } ${emojisStatic}
         `,
       },
       {
-        name: mustache.render(ru.embeds.serverInfo.fields.aboutRoles.name, {
-          serverRolesLength: serverRolesLength,
-        }),
+        name: mustache.render(
+          locales[interaction.locale].embeds.serverInfo.fields.aboutRoles.name,
+          {
+            serverRolesLength: serverRolesLength,
+          }
+        ),
         value: serverRoles,
       },
     ];
-    const embedColors = botConfig.embedColors.botColor;
+    const botColor = botConfig.embedColors.botColor;
     const embedThumbnailImage = {
       url: interaction.guild.iconURL() || ru.embeds.images.emptyAva.url,
     };
@@ -142,7 +189,7 @@ module.exports = {
           embedTittle,
           undefined,
           embedFields,
-          embedColors,
+          botColor,
           embedThumbnailImage
         ),
       ],

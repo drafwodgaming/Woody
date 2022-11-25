@@ -3,24 +3,35 @@ const moment = require("moment");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
 const { stripIndents } = require("common-tags");
-const ru = require("../../Config/Languages/ru");
+const locales = require("../Functions/locales");
 const en = require("../../Config/Languages/en");
-
-moment.updateLocale(ru.time.moment.momentLocale, {
-  weekdays: ru.time.moment.momentWeekList.split("_"),
-});
+const ru = require("../../Config/Languages/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(ru.bot.commands.userInfo.name)
-    .setDescription(ru.bot.commands.userInfo.description)
+    .setName(en.bot.commands.userInfo.name)
+    .setDescription(en.bot.commands.userInfo.description)
+    .setDescriptionLocalizations({
+      ru: ru.bot.commands.userInfo.description,
+      uk: ru.bot.commands.userInfo.description,
+    })
     .setDMPermission(false)
     .addUserOption((option) =>
       option
-        .setName(ru.bot.commands.userInfo.option.name)
-        .setDescription(ru.bot.commands.userInfo.option.description)
+        .setName(en.bot.commands.userInfo.option.name)
+        .setDescription(en.bot.commands.userInfo.option.description)
+        .setDescriptionLocalizations({
+          ru: ru.bot.commands.userInfo.description,
+          uk: ru.bot.commands.userInfo.description,
+        })
+        .setRequired(true)
     ),
   async execute(interaction) {
+    moment.updateLocale(locales[interaction.locale].time.moment.momentLocale, {
+      weekdays:
+        locales[interaction.locale].time.moment.momentWeekList.split("_"),
+    });
+
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: ПОЛЬЗОВАТЕЛЯ
@@ -32,14 +43,14 @@ module.exports = {
     const guildMember = interaction.guild.members.cache.get(targetUser.id);
 
     const userCreatedAt = moment(targetUser.createdAt).format(
-      ru.time.defaultTimeFormat
+      locales[interaction.locale].time.defaultTimeFormat
     );
 
     const statusList = {
-      online: ru.bot.presence.status.online,
-      idle: ru.bot.presence.status.idle,
-      offline: ru.bot.presence.status.offline,
-      dnd: ru.bot.presence.status.dnd,
+      online: locales[interaction.locale].bot.presence.status.online,
+      idle: locales[interaction.locale].bot.presence.status.idle,
+      offline: locales[interaction.locale].bot.presence.status.offline,
+      dnd: locales[interaction.locale].bot.presence.status.dnd,
     };
     /**
      * ! --------------------------------
@@ -47,7 +58,7 @@ module.exports = {
      * ! --------------------------------
      */
     const memberJoinedAt = moment(guildMember.joinedAt).format(
-      ru.time.defaultTimeFormat
+      locales[interaction.locale].time.defaultTimeFormat
     );
     const memberRoles = guildMember.roles.cache
       .map((role) => role)
@@ -59,36 +70,53 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: EMBED
      * ! --------------------------------
      */
-    const embedTitle = ru.embeds.userInfo.title.name;
+    const embedTitle = locales[interaction.locale].embeds.userInfo.title.name;
     const embedFields = [
       {
-        name: ru.embeds.userInfo.fields.aboutUser.name,
+        name: locales[interaction.locale].embeds.userInfo.fields.aboutUser.name,
         value: stripIndents`
-        ${ru.embeds.userInfo.fields.aboutUser.nickname} ${targetUser}
-        ${ru.embeds.userInfo.fields.aboutUser.userId} ${targetUser.id}
-        ${ru.embeds.userInfo.fields.aboutUser.createdTime} \`${userCreatedAt}\`
-        ${ru.embeds.userInfo.fields.aboutUser.userStatus} ${
+        ${
+          locales[interaction.locale].embeds.userInfo.fields.aboutUser.nickname
+        } ${targetUser}
+        ${
+          locales[interaction.locale].embeds.userInfo.fields.aboutUser.userId
+        } ${targetUser.id}
+        ${
+          locales[interaction.locale].embeds.userInfo.fields.aboutUser
+            .createdTime
+        } \`${userCreatedAt}\`
+        ${
+          locales[interaction.locale].embeds.userInfo.fields.aboutUser
+            .userStatus
+        } ${
           statusList[
             guildMember.presence
               ? guildMember.presence.status
-              : ru.bot.presence.offline
+              : locales[interaction.locale].bot.presence.offline
           ]
         }
         `,
       },
       {
-        name: ru.embeds.userInfo.fields.aboutMember.name,
+        name: locales[interaction.locale].embeds.userInfo.fields.aboutMember
+          .name,
         value: stripIndents`
-        ${ru.embeds.userInfo.fields.aboutMember.joinedTime} \`${memberJoinedAt}\`
+        ${
+          locales[interaction.locale].embeds.userInfo.fields.aboutMember
+            .joinedTime
+        } \`${memberJoinedAt}\`
         `,
       },
       {
-        name: ru.embeds.userInfo.fields.memberRoles.name,
-        value: memberRoles || ru.embeds.userInfo.fields.memberRoles.noRoles,
+        name: locales[interaction.locale].embeds.userInfo.fields.memberRoles
+          .name,
+        value:
+          memberRoles ||
+          locales[interaction.locale].embeds.userInfo.fields.memberRoles
+            .noRoles,
       },
     ];
-    const embedColor = botConfig.embedColors.botColor;
-
+    const botColor = botConfig.embedColors.botColor;
     const embedThumbnailImage = {
       url: targetUser.avatarURL() || ru.embeds.images.empyAva.url,
     };
@@ -98,7 +126,7 @@ module.exports = {
           embedTitle,
           undefined,
           embedFields,
-          embedColor,
+          botColor,
           embedThumbnailImage
         ),
       ],

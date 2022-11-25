@@ -1,6 +1,5 @@
 const { Events } = require("discord.js");
 const ru = require("../../Config/Languages/ru");
-const mustache = require("mustache");
 
 module.exports = {
   name: Events.InteractionCreate,

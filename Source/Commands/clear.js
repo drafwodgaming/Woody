@@ -1,21 +1,29 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const mustache = require("mustache");
 const { embedSetup } = require("../Functions/embedSetup");
-const { MultilingualService } = require("discord.js-multilingual-utils");
 const botConfig = require("../../Config/botConfig");
-const ru = require("../../Config/Languages/ru");
+const locales = require("../Functions/locales");
 const en = require("../../Config/Languages/en");
+const ru = require("../../Config/Languages/ru");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(ru.bot.commands.clear.name)
-    .setDescription(ru.bot.commands.clear.description)
+    .setName(en.bot.commands.clear.name)
+    .setDescription(en.bot.commands.clear.description)
+    .setDescriptionLocalizations({
+      ru: ru.bot.commands.clear.description,
+      uk: ru.bot.commands.clear.description,
+    })
     .setDMPermission(false)
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addNumberOption((option) =>
       option
-        .setName(ru.bot.commands.clear.option.name)
-        .setDescription(ru.bot.commands.clear.option.description)
+        .setName(en.bot.commands.clear.option.name)
+        .setDescription(en.bot.commands.clear.option.description)
+        .setDescriptionLocalizations({
+          ru: ru.bot.commands.clear.option.description,
+          uk: ru.bot.commands.clear.option.description,
+        })
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -33,11 +41,12 @@ module.exports = {
      * ! --------------------------------
      */
     const messageDeletionLimit =
-      ru.embeds.clear.description.messageDeletionLimit;
+      locales[interaction.locale].embeds.clear.description.messageDeletionLimit;
     const incorrectNumberMessages =
-      ru.embeds.clear.description.incorrectNumberMessages;
+      locales[interaction.locale].embeds.clear.description
+        .incorrectNumberMessages;
     const messageDeleted = mustache.render(
-      ru.embeds.clear.description.messageDeleted,
+      locales[interaction.locale].embeds.clear.description.messageDeleted,
       {
         numMessages: numMessages,
       }
