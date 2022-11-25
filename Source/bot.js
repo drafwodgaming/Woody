@@ -3,7 +3,7 @@ const botConfig = require("../Config/botConfig");
 const botIntents = require("../Config/botIntents");
 const fileSystem = require("fs");
 const path = require("path");
-const ru = require("../Config/ru");
+const ru = require("../Config/Languages/ru");
 
 const client = new Client({ intents: botIntents });
 const rest = new REST({ version: botConfig.bot.restVersion }).setToken(

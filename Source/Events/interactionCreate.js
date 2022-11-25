@@ -1,5 +1,5 @@
 const { Events } = require("discord.js");
-const ru = require("../../Config/ru");
+const ru = require("../../Config/Languages/ru");
 const mustache = require("mustache");
 
 module.exports = {
@@ -11,12 +11,7 @@ module.exports = {
       if (!command) return;
 
       await command.execute(interaction).catch(async (error) => {
-        console.log(
-          ru.logs.errors.title,
-          mustache.render(ru.logs.errors.body.errorConsole, {
-            error: error,
-          })
-        );
+        console.log(ru.logs.errors.title, `${error}`);
 
         await interaction.reply({
           content: ru.logs.errors.body.errorCallCommand,

@@ -2,7 +2,7 @@ const { Events } = require("discord.js");
 const botConfig = require("../../Config/botConfig");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
-const ru = require("../../Config/ru");
+const ru = require("../../Config/Languages/ru");
 
 module.exports = {
   name: Events.ClientReady,

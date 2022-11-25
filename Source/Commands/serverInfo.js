@@ -7,9 +7,10 @@ const {
 } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const { stripIndents } = require("common-tags");
-const ru = require("../../Config/ru");
+const ru = require("../../Config/Languages/ru");
 const mustache = require("mustache");
 const botConfig = require("../../Config/botConfig");
+const en = require("../../Config/Languages/en");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -131,7 +132,7 @@ module.exports = {
         value: serverRoles,
       },
     ];
-    const embedColors = botConfig.embedColors.trancparent;
+    const embedColors = botConfig.embedColors.botColor;
     const embedThumbnailImage = {
       url: interaction.guild.iconURL() || ru.embeds.images.emptyAva.url,
     };

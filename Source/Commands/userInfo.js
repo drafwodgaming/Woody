@@ -3,7 +3,8 @@ const moment = require("moment");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
 const { stripIndents } = require("common-tags");
-const ru = require("../../Config/ru");
+const ru = require("../../Config/Languages/ru");
+const en = require("../../Config/Languages/en");
 
 moment.updateLocale(ru.time.moment.momentLocale, {
   weekdays: ru.time.moment.momentWeekList.split("_"),
@@ -18,7 +19,6 @@ module.exports = {
       option
         .setName(ru.bot.commands.userInfo.option.name)
         .setDescription(ru.bot.commands.userInfo.option.description)
-        .setRequired(true)
     ),
   async execute(interaction) {
     /**
@@ -26,7 +26,7 @@ module.exports = {
      * ! ПЕРЕМЕННЫЕ: ПОЛЬЗОВАТЕЛЯ
      * ! --------------------------------
      */
-    const targetUser = interaction.options.getUser(
+    let targetUser = interaction.options.getUser(
       ru.bot.commands.userInfo.option.name
     );
     const guildMember = interaction.guild.members.cache.get(targetUser.id);
@@ -41,7 +41,6 @@ module.exports = {
       offline: ru.bot.presence.status.offline,
       dnd: ru.bot.presence.status.dnd,
     };
-
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: УЧАСТНИКА НА СЕРВЕРЕ
@@ -55,7 +54,6 @@ module.exports = {
       .sort((a, b) => b.position - a.position)
       .filter((role) => role.id != interaction.guild.id)
       .join(" ");
-
     /**
      * ! --------------------------------
      * ! ПЕРЕМЕННЫЕ: EMBED
@@ -89,7 +87,7 @@ module.exports = {
         value: memberRoles || ru.embeds.userInfo.fields.memberRoles.noRoles,
       },
     ];
-    const embedColor = botConfig.embedColors.trancparent;
+    const embedColor = botConfig.embedColors.botColor;
 
     const embedThumbnailImage = {
       url: targetUser.avatarURL() || ru.embeds.images.empyAva.url,

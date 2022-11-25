@@ -5,10 +5,11 @@ const {
 } = require("discord.js");
 const { embedSetup } = require("../Functions/embedSetup");
 const botConfig = require("../../Config/botConfig");
-const ru = require("../../Config/ru");
+const ru = require("../../Config/Languages/ru");
 const welcomeChannelSchema = require("../Models/welcomeChannel");
 const logChannelSchema = require("../Models/logChannel");
 const mustache = require("mustache");
+const en = require("../../Config/Languages/en");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,6 +35,7 @@ module.exports = {
       subcommand
         .setName(ru.bot.commands.setupChannel.logChannel.name)
         .setDescription(ru.bot.commands.setupChannel.logChannel.description)
+
         .addChannelOption((option) =>
           option
             .setName(ru.bot.commands.setupChannel.logChannel.option.name)
@@ -44,6 +46,7 @@ module.exports = {
             .setRequired(true)
         )
     ),
+
   async execute(interaction) {
     const subCommand = interaction.options.getSubcommand();
     const interactionChannel = await interaction.options.getChannel("channel");

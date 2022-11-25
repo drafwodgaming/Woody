@@ -74,10 +74,10 @@ module.exports = {
     clear: {
       description: {
         messageDeletionLimit: bold(
-          "Вы не можете удалить больше 100 сообщений!"
+          "❌ Вы не можете удалить больше 100 сообщений!"
         ),
         incorrectNumberMessages: bold(
-          "Удаление отрицательных и нулевых сообщений невозможно!"
+          "❌ Удаление отрицательных и нулевых сообщений невозможно!"
         ),
         messageDeleted: bold("{{numMessages}} сообщений удалены"),
       },
@@ -183,7 +183,6 @@ module.exports = {
     errors: {
       title: chalk.red("[ERROR] ❯"),
       body: {
-        errorConsole: chalk.red("{{error}}"),
         errorCallCommand: "Произошла ошибка при вызове этой команды!",
       },
     },

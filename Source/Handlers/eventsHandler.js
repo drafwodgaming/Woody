@@ -1,6 +1,6 @@
 const fileSystem = require("fs");
 const path = require("path");
-const ru = require("../../Config/ru");
+const ru = require("../../Config/Languages/ru");
 
 module.exports = (client, sourcePath) => {
   client.eventsHandler = async () => {

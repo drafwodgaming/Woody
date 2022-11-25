@@ -1,8 +1,10 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const mustache = require("mustache");
 const { embedSetup } = require("../Functions/embedSetup");
+const { MultilingualService } = require("discord.js-multilingual-utils");
 const botConfig = require("../../Config/botConfig");
-const ru = require("../../Config/ru");
+const ru = require("../../Config/Languages/ru");
+const en = require("../../Config/Languages/en");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -42,6 +44,7 @@ module.exports = {
     );
     const errorColor = botConfig.embedColors.error;
     const successColor = botConfig.embedColors.success;
+
     /**
      * ! --------------------------------
      * ! ПРОВЕРКА НА КОЛИЧЕСТВО ВВЕДЁЕННЫХ СООБЩЕНИЙ

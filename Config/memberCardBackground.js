@@ -1,7 +1,7 @@
 module.exports = [
-  "https://i.imgur.com/c8p8Ark.png",
-  "https://i.imgur.com/U1DnzwX.png",
-  "https://i.imgur.com/M5p64Dd.png",
-  "https://i.imgur.com/Om4tunn.png",
-  "https://i.imgur.com/IOB4B1d.png",
+  "https://i.imgur.com/EE22kZw.png",
+  "https://i.imgur.com/40OkhTC.png",
+  "https://i.imgur.com/5SdZjGu.png",
+  "https://i.imgur.com/gAuTpa8.png",
+  "https://i.imgur.com/nnZBfdG.png",
 ];
