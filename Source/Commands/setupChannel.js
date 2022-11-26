@@ -16,18 +16,32 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName(en.bot.commands.setupChannel.name)
     .setDescription(en.bot.commands.setupChannel.description)
+    .setDescriptionLocalizations({
+      ru: ru.bot.commands.setupChannel.description,
+      uk: ru.bot.commands.setupChannel.description,
+    })
     .setDMPermission(false)
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addSubcommand((subcommand) =>
       subcommand
         .setName(en.bot.commands.setupChannel.welcomeChannel.name)
         .setDescription(en.bot.commands.setupChannel.welcomeChannel.description)
+        .setDescriptionLocalizations({
+          ru: ru.bot.commands.setupChannel.welcomeChannel.description,
+          uk: ru.bot.commands.setupChannel.welcomeChannel.description,
+        })
         .addChannelOption((option) =>
           option
             .setName(en.bot.commands.setupChannel.welcomeChannel.option.name)
             .setDescription(
               en.bot.commands.setupChannel.welcomeChannel.option.description
             )
+            .setDescriptionLocalizations({
+              ru: ru.bot.commands.setupChannel.welcomeChannel.option
+                .description,
+              uk: ru.bot.commands.setupChannel.welcomeChannel.option
+                .description,
+            })
             .addChannelTypes(ChannelType.GuildText)
             .setRequired(true)
         )
@@ -36,6 +50,10 @@ module.exports = {
       subcommand
         .setName(en.bot.commands.setupChannel.logChannel.name)
         .setDescription(en.bot.commands.setupChannel.logChannel.description)
+        .setDescriptionLocalizations({
+          ru: ru.bot.commands.setupChannel.logChannel.description,
+          uk: ru.bot.commands.setupChannel.logChannel.description,
+        })
 
         .addChannelOption((option) =>
           option
@@ -43,6 +61,10 @@ module.exports = {
             .setDescription(
               en.bot.commands.setupChannel.logChannel.option.description
             )
+            .setDescriptionLocalizations({
+              ru: ru.bot.commands.setupChannel.logChannel.option.description,
+              uk: ru.bot.commands.setupChannel.logChannel.option.description,
+            })
             .addChannelTypes(ChannelType.GuildText)
             .setRequired(true)
         )
@@ -52,6 +74,7 @@ module.exports = {
     const subCommand = interaction.options.getSubcommand();
     const interactionChannel = await interaction.options.getChannel("channel");
     const interactionGuildId = await interaction.guild.id;
+    const interactionGuildName = await interaction.guild.name;
 
     switch (subCommand) {
       case "welcome":
@@ -80,6 +103,7 @@ module.exports = {
           if (welcomeChannel) {
             welcomeChannel.channelId = interactionChannel.id;
             welcomeChannel.guildId = interactionGuildId;
+            welcomeChannel.guildName = interactionGuildName;
             await welcomeChannel.save();
             await interaction.reply({
               embeds: [
@@ -98,6 +122,7 @@ module.exports = {
           const newChannelId = new welcomeChannelSchema({
             channelId: interactionChannel.id,
             guildId: interactionGuildId,
+            guildName: interactionGuildName,
           });
           await newChannelId.save();
           await interaction.reply({
@@ -140,6 +165,7 @@ module.exports = {
           if (logChannel) {
             logChannel.channelId = interactionChannel.id;
             logChannel.guildId = interactionGuildId;
+            logChannel.guildName = interactionGuildName;
             await logChannel.save();
             await interaction.reply({
               embeds: [
@@ -158,6 +184,7 @@ module.exports = {
           const newChannelId = new logChannelSchema({
             channelId: interactionChannel.id,
             guildId: interactionGuildId,
+            guildName: interactionGuildName,
           });
           await newChannelId.save();
           await interaction.reply({
